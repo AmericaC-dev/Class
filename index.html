@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sustentable vs. Sostenible | Dos raíces, un mismo bosque</title>
+<meta name="description" content="Una guía visual y clara sobre la diferencia entre sustentabilidad y sostenibilidad.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+
+<style>
+  /* ============ TOKENS ============ */
+  :root{
+    --forest:#1B4332;
+    --moss:#2D6A4F;
+    --sage:#7FA98A;
+    --sage-soft:#DCE7DE;
+    --clay:#A9744F;
+    --cream:#F7F5EE;
+    --ink:#17231C;
+    --ink-soft:#4A594F;
+    --line:#D7DED4;
+    --radius:14px;
+    --max:1160px;
+    --serif:'Fraunces', serif;
+    --sans:'Work Sans', sans-serif;
+    --mono:'IBM Plex Mono', monospace;
+  }
+
+  *,*::before,*::after{box-sizing:border-box;}
+  html{scroll-behavior:smooth;font-size:18px;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:1.05rem;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media (max-width:600px){
+    html{font-size:16px;}
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;}
+  h1,h2,h3{font-family:var(--serif);color:var(--forest);margin:0 0 .5em;line-height:1.1;}
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:.72rem;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--moss);
+    display:inline-flex;
+    align-items:center;
+    gap:.5em;
+  }
+  .eyebrow::before{
+    content:"";
+    width:18px;height:1px;
+    background:var(--moss);
+    display:inline-block;
+  }
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 28px;}
+  section{padding:96px 0;}
+  :focus-visible{outline:3px solid var(--clay);outline-offset:3px;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:.01ms !important;transition-duration:.01ms !important;}
+  }
+
+  /* ============ NAV ============ */
+  header.site-nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(247,245,238,.88);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:var(--max);margin:0 auto;padding:18px 28px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .brand{
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:1.25rem;
+    color:var(--forest);
+    display:flex;align-items:center;gap:.5em;
+    text-decoration:none;
+  }
+  .brand span{color:var(--clay);}
+  nav.links{display:flex;gap:28px;}
+  nav.links a{
+    text-decoration:none;
+    font-size:.92rem;
+    font-weight:500;
+    color:var(--ink-soft);
+    position:relative;
+    padding:4px 0;
+  }
+  nav.links a::after{
+    content:"";position:absolute;left:0;bottom:0;width:0;height:2px;
+    background:var(--moss);transition:width .25s ease;
+  }
+  nav.links a:hover::after,nav.links a:focus-visible::after{width:100%;}
+  .nav-toggle{display:none;background:none;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:1rem;}
+
+  @media (max-width:760px){
+    nav.links{
+      position:absolute;top:100%;left:0;right:0;
+      background:var(--cream);
+      flex-direction:column;
+      padding:16px 28px 24px;
+      border-bottom:1px solid var(--line);
+      display:none;
+      gap:16px;
+    }
+    nav.links.open{display:flex;}
+    .nav-toggle{display:block;}
+  }
+
+  /* ============ HERO ============ */
+  .hero{
+    padding:72px 0 40px;
+    position:relative;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    gap:56px;
+    align-items:center;
+  }
+  .hero h1{
+    font-size:clamp(2.4rem,4.4vw,3.6rem);
+    font-weight:600;
+    letter-spacing:-.01em;
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--clay);
+  }
+  .hero p.lead{
+    font-size:1.08rem;
+    color:var(--ink-soft);
+    max-width:46ch;
+    margin:18px 0 30px;
+  }
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    display:inline-block;
+    padding:13px 24px;
+    border-radius:999px;
+    font-weight:600;
+    font-size:.92rem;
+    text-decoration:none;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .btn-solid{background:var(--forest);color:var(--cream);}
+  .btn-solid:hover{transform:translateY(-2px);box-shadow:0 10px 22px -8px rgba(27,67,50,.55);}
+  .btn-outline{border:1px solid var(--moss);color:var(--moss);}
+  .btn-outline:hover{background:var(--sage-soft);}
+
+  .hero-media{position:relative;}
+  .hero-media img{
+    width:100%;height:420px;object-fit:cover;
+    border-radius:var(--radius);
+  }
+  .hero-media .tag{
+    position:absolute;bottom:-22px;left:-22px;
+    background:var(--forest);color:var(--cream);
+    padding:16px 20px;border-radius:12px;
+    font-family:var(--mono);font-size:.78rem;
+    max-width:210px;
+    box-shadow:0 18px 30px -14px rgba(0,0,0,.35);
+  }
+
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-media{order:-1;}
+    .hero-media .tag{display:none;}
+  }
+
+  /* ============ CONCEPT SECTIONS ============ */
+  .concept{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:64px;
+    align-items:center;
+  }
+  .concept.reverse .concept-media{order:2;}
+  .concept-media img{
+    width:100%;height:340px;object-fit:cover;border-radius:var(--radius);
+  }
+  .concept h2{font-size:clamp(1.9rem,3vw,2.5rem);}
+  .concept p{color:var(--ink-soft);max-width:52ch;}
+  .concept .badge{
+    display:inline-block;
+    font-family:var(--mono);
+    font-size:.7rem;
+    letter-spacing:.08em;
+    background:var(--sage-soft);
+    color:var(--moss);
+    padding:6px 12px;
+    border-radius:999px;
+    margin-bottom:16px;
+    text-transform:uppercase;
+  }
+  .pill-list{list-style:none;margin:22px 0 0;padding:0;display:flex;flex-direction:column;gap:12px;}
+  .pill-list li{
+    position:relative;
+    padding-left:22px;
+    font-size:.95rem;color:var(--ink);
+  }
+  .pill-list li::before{
+    content:"";
+    position:absolute;
+    left:0;top:.55em;
+    width:8px;height:8px;border-radius:50%;
+    background:var(--clay);
+  }
+
+  #sustentable{background:linear-gradient(180deg,var(--cream),#EFEEE3 60%,var(--cream));}
+  #sostenible{background:var(--cream);}
+
+  @media (max-width:900px){
+    .concept, .concept.reverse{grid-template-columns:1fr;}
+    .concept.reverse .concept-media{order:0;}
+  }
+
+  /* ============ COMPARATIVE ============ */
+  .compare{background:var(--forest);color:var(--cream);}
+  .compare .eyebrow{color:var(--sage);}
+  .compare .eyebrow::before{background:var(--sage);}
+  .compare h2{color:var(--cream);}
+  .compare > .wrap > p.lead{color:#CFE0D4;max-width:60ch;margin-bottom:48px;}
+
+  .root-diagram{
+    display:flex;justify-content:center;margin:0 0 56px;
+  }
+
+  .compare-grid{
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    gap:0;
+    align-items:stretch;
+    border-radius:var(--radius);
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.14);
+  }
+  .compare-col{
+    background:rgba(255,255,255,.04);
+    padding:36px 30px;
+  }
+  .compare-col:first-child{border-right:1px solid rgba(255,255,255,.14);}
+  .compare-col h3{
+    color:var(--cream);
+    font-size:1.35rem;
+    margin-bottom:6px;
+  }
+  .compare-col .sub{
+    font-family:var(--mono);
+    font-size:.72rem;
+    color:var(--sage);
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    display:block;
+    margin-bottom:18px;
+  }
+  .compare-col dl{margin:0;}
+  .compare-col dt{
+    font-weight:600;
+    font-size:.85rem;
+    color:#CFE0D4;
+    margin-top:16px;
+  }
+  .compare-col dt:first-child{margin-top:0;}
+  .compare-col dd{
+    margin:4px 0 0;
+    font-size:.92rem;
+    color:#AEC6B4;
+  }
+  .vs-divider{
+    display:flex;align-items:center;justify-content:center;
+    padding:0 22px;
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:1.4rem;
+    color:var(--sage);
+    background:rgba(255,255,255,.02);
+  }
+  @media (max-width:760px){
+    .compare-grid{grid-template-columns:1fr;}
+    .compare-col:first-child{border-right:none;border-bottom:1px solid rgba(255,255,255,.14);}
+    .vs-divider{padding:16px 0;}
+  }
+
+  .key-diff{
+    margin-top:44px;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.14);
+    border-radius:var(--radius);
+    padding:28px 32px;
+    font-size:1.02rem;
+  }
+  .key-diff strong{color:var(--sage);}
+
+  /* ============ FOOTER ============ */
+  footer{
+    background:#12261C;
+    color:#9FB6A6;
+    padding:52px 0 30px;
+    font-size:.88rem;
+  }
+  footer .wrap{
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;
+  }
+  footer .brand{color:var(--cream);}
+  footer .brand span{color:var(--sage);}
+  footer nav{display:flex;gap:20px;flex-wrap:wrap;}
+  footer nav a{text-decoration:none;color:#9FB6A6;}
+  footer nav a:hover{color:var(--cream);}
+  footer .bottom{
+    max-width:var(--max);margin:36px auto 0;padding:20px 28px 0;
+    border-top:1px solid rgba(255,255,255,.08);
+    font-size:.78rem;color:#6E8778;
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand">🌱 Raíz<span>&</span>Rumbo</a>
+    <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false" onclick="const n=document.getElementById('navLinks');const open=n.classList.toggle('open');this.setAttribute('aria-expanded',open);">☰</button>
+    <nav class="links" id="navLinks">
+      <a href="#sustentable">Sustentable</a>
+      <a href="#sostenible">Sostenible</a>
+      <a href="#comparativa">Diferencias</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">Dos palabras, dos horizontes</span>
+        <h1>Sustentable y sostenible<br>no son <em>sinónimos</em></h1>
+        <p class="lead">Se usan casi como si fueran intercambiables, pero cada palabra describe un tipo distinto de equilibrio con el planeta: uno mide cuánto podemos sostener hoy, el otro mide qué podemos heredar mañana.</p>
+        <div class="hero-cta">
+          <a href="#sustentable" class="btn btn-solid">Explorar los conceptos</a>
+          <a href="#comparativa" class="btn btn-outline">Ver la comparación</a>
+        </div>
+      </div>
+      <div class="hero-media">
+        <img src="https://images.unsplash.com/photo-1623088098214-ce82ffa8f251?auto=format&fit=crop&w=1200&q=80" alt="Turbina eólica blanca sobre un campo verde bajo un cielo azul, símbolo de energía renovable">
+        <div class="tag">Un sistema equilibra recursos a corto plazo y futuro a largo plazo, al mismo tiempo.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SUSTENTABLE ============ -->
+  <section id="sustentable">
+    <div class="wrap concept">
+      <div>
+        <span class="badge">Concepto 1</span>
+        <h2>¿Qué significa ser sustentable?</h2>
+        <p>Un sistema <strong>sustentable</strong> es aquel que puede mantenerse por sí mismo con los recursos disponibles, sin agotarlos, durante un período de tiempo determinado. Es una noción centrada en el <strong>presente</strong>: se pregunta si el ritmo actual de consumo o producción puede sostenerse hoy y en el corto o mediano plazo, sin necesidad de ayuda externa constante.</p>
+        <p>La sustentabilidad suele aplicarse a nivel de <strong>recursos concretos y procesos técnicos</strong>: un cultivo, una fuente de energía, un sistema de riego. La pregunta clave es: <em>“¿el recurso se regenera al mismo ritmo en que lo estamos usando?”</em></p>
+        <ul class="pill-list">
+          <li>Se enfoca en el <strong>uso eficiente de recursos</strong> disponibles en el aquí y ahora.</li>
+          <li>Prioriza el <strong>equilibrio técnico y ecológico</strong> de un proceso específico.</li>
+          <li>Su horizonte temporal es <strong>corto o mediano plazo</strong>.</li>
+          <li>Ejemplo: una granja que solo extrae la cantidad de agua que su acuífero repone cada año.</li>
+        </ul>
+      </div>
+      <div class="concept-media">
+        <img src="https://images.unsplash.com/photo-1668196469420-5947dc8236e3?auto=format&fit=crop&w=1000&q=80" alt="Panel solar y turbina eólica funcionando juntos, aprovechando de forma eficiente los recursos renovables disponibles">
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SOSTENIBLE ============ -->
+  <section id="sostenible">
+    <div class="wrap concept reverse">
+      <div class="concept-media">
+        <img src="https://images.unsplash.com/photo-1527690499469-ef2eff9c6735?auto=format&fit=crop&w=1000&q=80" alt="Vista aérea de techos y azoteas verdes integradas entre edificios, mostrando un desarrollo urbano a largo plazo">
+      </div>
+      <div>
+        <span class="badge">Concepto 2</span>
+        <h2>¿Qué significa ser sostenible?</h2>
+        <p>Un sistema <strong>sostenible</strong> va un paso más allá: no solo busca mantenerse en el presente, sino garantizar que las futuras generaciones puedan satisfacer sus propias necesidades sin comprometer el planeta. Es una visión de <strong>largo plazo</strong> que integra tres dimensiones al mismo tiempo: lo <strong>ambiental</strong>, lo <strong>social</strong> y lo <strong>económico</strong>.</p>
+        <p>La sostenibilidad no se limita a un recurso aislado, sino que evalúa <strong>sistemas completos</strong>: ciudades, economías, cadenas de producción. La pregunta clave es: <em>“¿este modelo de desarrollo puede perdurar generación tras generación, sin generar deudas ambientales o sociales?”</em></p>
+        <ul class="pill-list">
+          <li>Equilibra tres pilares: <strong>ambiente, sociedad y economía</strong>.</li>
+          <li>Piensa en el <strong>bienestar de generaciones futuras</strong>, no solo el actual.</li>
+          <li>Su horizonte temporal es <strong>largo plazo</strong>, casi indefinido.</li>
+          <li>Ejemplo: una ciudad que reduce emisiones, genera empleo digno y protege sus áreas verdes al mismo tiempo.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMPARATIVA ============ -->
+  <section id="comparativa" class="compare">
+    <div class="wrap">
+      <span class="eyebrow">Puestos lado a lado</span>
+      <h2>La diferencia principal</h2>
+      <p class="lead">Sustentable mide si un recurso aguanta el ritmo al que lo usamos <strong>hoy</strong>. Sostenible mide si el sistema completo —ambiente, sociedad y economía— puede perdurar <strong>generación tras generación</strong>. Uno es una fotografía del presente; el otro, una trayectoria hacia el futuro.</p>
+
+      <div class="compare-grid">
+        <div class="compare-col">
+          <span class="sub">Corto / mediano plazo</span>
+          <h3>Sustentable</h3>
+          <dl>
+            <dt>Enfoque</dt>
+            <dd>Uso eficiente de un recurso específico.</dd>
+            <dt>Escala</dt>
+            <dd>Procesos y sistemas técnicos puntuales.</dd>
+            <dt>Pregunta central</dt>
+            <dd>¿Se puede mantener este ritmo sin agotar el recurso?</dd>
+            <dt>Dimensiones</dt>
+            <dd>Principalmente ambiental / técnica.</dd>
+          </dl>
+        </div>
+        <div class="vs-divider">vs.</div>
+        <div class="compare-col">
+          <span class="sub">Largo plazo</span>
+          <h3>Sostenible</h3>
+          <dl>
+            <dt>Enfoque</dt>
+            <dd>Equilibrio integral del sistema completo.</dd>
+            <dt>Escala</dt>
+            <dd>Sociedades, economías, ciudades enteras.</dd>
+            <dt>Pregunta central</dt>
+            <dd>¿Perdurará este modelo para las próximas generaciones?</dd>
+            <dt>Dimensiones</dt>
+            <dd>Ambiental, social y económica a la vez.</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="key-diff">
+        <strong>En una frase:</strong> todo lo sostenible tiende a ser sustentable en el camino, pero no todo lo sustentable llega a ser sostenible —puede mantenerse hoy y aun así no garantizar equidad social o viabilidad económica a largo plazo.
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div class="brand" style="font-family:var(--serif);font-size:1.15rem;margin-bottom:8px;">Raíz<span>&</span>Rumbo</div>
+      <p style="max-width:34ch;margin:0;">Una guía breve para no confundir dos palabras que definen cómo cuidamos el planeta.</p>
+    </div>
+    <nav>
+      <a href="#sustentable">Sustentable</a>
+      <a href="#sostenible">Sostenible</a>
+      <a href="#comparativa">Diferencias</a>
+    </nav>
+  </div>
+  <div class="bottom">
+    Imágenes de Unsplash. Contenido con fines educativos. © 2026 Raíz & Rumbo.
+  </div>
+</footer>
+
+</body>
+</html>
+
+<!--
+================================================================
+  GUÍA RÁPIDA: PUBLICAR ESTA PÁGINA GRATIS CON GITHUB PAGES
+================================================================
+
+1. Guarda este archivo
+   Copia todo el código anterior y guárdalo en tu computadora
+   con el nombre exacto: index.html
+
+2. Crea un repositorio en GitHub
+   - Entra a https://github.com y crea una cuenta si no tienes una.
+   - Haz clic en "New repository".
+   - Ponle un nombre, por ejemplo: sustentable-vs-sostenible
+   - Márcalo como "Public" y crea el repositorio (no hace falta
+     agregar README ni licencia todavía).
+
+3. Sube el archivo index.html
+   Opción A (sin usar la terminal):
+   - Dentro del repositorio recién creado, haz clic en
+     "Add file" → "Upload files".
+   - Arrastra tu archivo index.html y confirma con "Commit changes".
+
+   Opción B (con Git en la terminal):
+     git init
+     git add index.html
+     git commit -m "Primera versión de la página"
+     git branch -M main
+     git remote add origin https://github.com/TU-USUARIO/TU-REPO.git
+     git push -u origin main
+
+4. Activa GitHub Pages
+   - Ve a la pestaña "Settings" del repositorio.
+   - En el menú lateral, entra a "Pages".
+   - En "Build and deployment" → "Source", elige "Deploy from a branch".
+   - En "Branch", selecciona "main" y la carpeta "/ (root)".
+   - Haz clic en "Save".
+
+5. Visita tu sitio publicado
+   - Espera 1-2 minutos mientras GitHub genera el sitio.
+   - Actualiza la página de "Pages": aparecerá un enlace como:
+     https://TU-USUARIO.github.io/TU-REPO/
+   - ¡Ese enlace ya es público y gratuito! Cada vez que subas
+     cambios a index.html, el sitio se actualizará solo.
+
+Tip: si el nombre del repositorio es TU-USUARIO.github.io,
+tu sitio quedará disponible directamente en la raíz:
+https://TU-USUARIO.github.io/
+================================================================
+-->
