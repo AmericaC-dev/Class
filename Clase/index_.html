@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Nube Tiene Peso | Impacto ambiental del almacenamiento digital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-deep:#0A1A22;
+    --bg-panel:#102A34;
+    --bg-panel-2:#153845;
+    --line: rgba(255,255,255,0.08);
+    --text-primary:#EAF3F0;
+    --text-muted:#93B3B0;
+    --aqua:#4CD9C0;
+    --aqua-dim: rgba(76,217,192,0.15);
+    --amber:#F5A93F;
+    --radius: 14px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg-deep);
+    color:var(--text-primary);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    margin:0 0 0.4em 0;
+  }
+  .mono{font-family:'JetBrains Mono', monospace;}
+  a{color:var(--aqua);}
+  img,svg{max-width:100%;}
+
+  .wrap{max-width:1080px; margin:0 auto; padding:0 24px;}
+  section{padding:88px 0;}
+  @media (max-width:640px){ section{padding:56px 0;} }
+
+  /* NAV */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(10,26,34,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 24px;
+  }
+  .brand{
+    display:flex; align-items:center; gap:10px;
+    font-family:'Fraunces', serif; font-weight:600; font-size:1.1rem;
+  }
+  .brand .dot{
+    width:10px; height:10px; border-radius:50%;
+    background:var(--aqua);
+    box-shadow:0 0 0 4px var(--aqua-dim);
+    animation:pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{ box-shadow:0 0 0 4px var(--aqua-dim);}
+    50%{ box-shadow:0 0 0 8px transparent;}
+  }
+  nav .links{ display:flex; gap:28px; font-size:0.92rem;}
+  nav .links a{ color:var(--text-muted); text-decoration:none; transition:color .2s;}
+  nav .links a:hover{ color:var(--text-primary);}
+  @media (max-width:640px){ nav .links{ display:none; } }
+
+  /* HERO */
+  .hero{
+    padding-top:72px; padding-bottom:64px;
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px; align-items:center;
+  }
+  @media (max-width:860px){ .hero{ grid-template-columns:1fr; } }
+  .eyebrow{
+    text-transform:uppercase; letter-spacing:0.14em; font-size:0.75rem;
+    color:var(--aqua); font-weight:600; margin-bottom:16px;
+  }
+  .hero h1{ font-size:clamp(2.1rem, 4.6vw, 3.4rem); line-height:1.08; }
+  .hero h1 em{ font-style:normal; color:var(--aqua); }
+  .hero p.lead{ color:var(--text-muted); font-size:1.08rem; max-width:46ch; margin-top:18px;}
+
+  .counter-card{
+    background:linear-gradient(180deg, var(--bg-panel-2), var(--bg-panel));
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:32px;
+    position:relative;
+    overflow:hidden;
+  }
+  .beaker{
+    position:relative; width:96px; height:130px; margin:0 auto 20px auto;
+    border:2px solid rgba(255,255,255,0.25);
+    border-top:none;
+    border-radius:0 0 14px 14px;
+  }
+  .beaker::before{
+    content:""; position:absolute; top:-2px; left:-14px; right:-14px; height:2px;
+    background:rgba(255,255,255,0.25);
+  }
+  .beaker .fill{
+    position:absolute; left:0; right:0; bottom:0; height:18%;
+    background:linear-gradient(180deg, var(--aqua), #2E9E8B);
+    transition:height 1.2s ease;
+  }
+  .beaker .wave{
+    position:absolute; left:-10%; right:-10%; top:-6px; height:14px;
+    background:radial-gradient(ellipse at center, rgba(76,217,192,0.9), transparent 70%);
+    animation:sway 3s ease-in-out infinite;
+  }
+  @keyframes sway{
+    0%,100%{ transform:translateX(-4%);}
+    50%{ transform:translateX(4%);}
+  }
+  .counter-label{ text-align:center; color:var(--text-muted); font-size:0.8rem; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:4px;}
+  .counter-value{ text-align:center; font-size:1.9rem; font-weight:700; color:var(--aqua); }
+  .counter-sub{ text-align:center; color:var(--text-muted); font-size:0.8rem; margin-top:6px;}
+  .counter-note{
+    margin-top:22px; padding-top:18px; border-top:1px solid var(--line);
+    color:var(--text-muted); font-size:0.85rem; text-align:center;
+  }
+
+  /* STATS / INFO */
+  .section-head{ max-width:640px; margin-bottom:44px;}
+  .section-head .eyebrow{ margin-bottom:10px;}
+  .section-head p{ color:var(--text-muted); }
+
+  .stat-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:20px;
+  }
+  @media (max-width:780px){ .stat-grid{ grid-template-columns:1fr; } }
+  .stat-card{
+    background:var(--bg-panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:26px;
+  }
+  .stat-card .icon{ font-size:1.6rem; margin-bottom:14px; display:block;}
+  .stat-card .big{
+    font-family:'JetBrains Mono', monospace; font-size:1.7rem; color:var(--amber); font-weight:700;
+    display:block; margin-bottom:6px;
+  }
+  .stat-card h3{ font-size:1.05rem; margin-bottom:8px; font-family:'Inter',sans-serif; font-weight:600;}
+  .stat-card p{ color:var(--text-muted); font-size:0.92rem; margin:0;}
+
+  .info-copy{
+    margin-top:40px; color:var(--text-muted); max-width:74ch;
+  }
+  .info-copy strong{ color:var(--text-primary); }
+
+  /* REFLEXION */
+  .reflect-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:start;
+  }
+  @media (max-width:780px){ .reflect-grid{ grid-template-columns:1fr; } }
+
+  .reflection-feed{ display:flex; flex-direction:column; gap:14px; max-height:420px; overflow-y:auto; padding-right:6px;}
+  .reflection-card{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:12px;
+    padding:16px 18px;
+  }
+  .reflection-card .who{ font-size:0.8rem; color:var(--aqua); margin-bottom:6px; font-weight:600;}
+  .reflection-card p{ margin:0; color:var(--text-primary); font-size:0.94rem;}
+
+  .reflect-form{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:var(--radius); padding:24px;
+  }
+  .reflect-form h3{ font-size:1.1rem; margin-bottom:6px;}
+  .reflect-form p.hint{ color:var(--text-muted); font-size:0.85rem; margin:0 0 16px 0;}
+
+  textarea, input[type=text], input[type=email]{
+    width:100%;
+    background:var(--bg-deep);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:12px 14px;
+    color:var(--text-primary);
+    font-family:'Inter', sans-serif;
+    font-size:0.95rem;
+    resize:vertical;
+  }
+  textarea:focus, input:focus{
+    outline:2px solid var(--aqua);
+    outline-offset:1px;
+    border-color:transparent;
+  }
+  label{ display:block; font-size:0.82rem; color:var(--text-muted); margin-bottom:6px; margin-top:14px;}
+  label:first-of-type{ margin-top:0;}
+
+  .btn{
+    appearance:none; border:none; cursor:pointer;
+    background:var(--aqua); color:#08201C;
+    font-family:'Inter', sans-serif; font-weight:600; font-size:0.95rem;
+    padding:12px 22px; border-radius:10px;
+    transition:transform .15s ease, box-shadow .15s ease;
+    margin-top:18px;
+  }
+  .btn:hover{ transform:translateY(-1px); box-shadow:0 8px 20px -8px rgba(76,217,192,0.6);}
+  .btn:active{ transform:translateY(0);}
+  .btn:disabled{ opacity:0.6; cursor:not-allowed; transform:none; box-shadow:none;}
+  .btn.secondary{
+    background:transparent; color:var(--aqua); border:1px solid var(--aqua);
+  }
+
+  /* FORM REGISTRO */
+  .form-card{
+    background:linear-gradient(180deg, var(--bg-panel-2), var(--bg-panel));
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:36px;
+    max-width:640px;
+  }
+  .form-row{ display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  @media (max-width:520px){ .form-row{ grid-template-columns:1fr;} }
+  .required-mark{ color:var(--amber); }
+
+  #form-status{
+    margin-top:16px; padding:12px 14px; border-radius:10px; font-size:0.9rem;
+    display:none;
+  }
+  #form-status.ok{ display:block; background:rgba(76,217,192,0.12); border:1px solid var(--aqua); color:var(--aqua); }
+  #form-status.err{ display:block; background:rgba(245,169,63,0.12); border:1px solid var(--amber); color:var(--amber); }
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:32px 0; color:var(--text-muted); font-size:0.85rem; text-align:center;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span> La nube tiene peso</div>
+    <div class="links">
+      <a href="#informacion">El problema</a>
+      <a href="#reflexion">Reflexión</a>
+      <a href="#registro">Súmate</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero wrap">
+  <div>
+    <div class="eyebrow">Impacto ambiental digital</div>
+    <h1>Cada archivo que guardas en <em>la nube</em> vive en un edificio que consume agua, energía y espacio real.</h1>
+    <p class="lead">"La nube" no es un lugar abstracto: es una red de centros de datos que llevan encendidos las 24 horas del día, refrigerados con agua y alimentados por electricidad. Esta página explica ese costo invisible — y te invita a dejar tu opinión.</p>
+  </div>
+
+  <div class="counter-card">
+    <div class="beaker">
+      <div class="fill" id="beakerFill"><div class="wave"></div></div>
+    </div>
+    <div class="counter-label">Agua estimada usada en refrigeración</div>
+    <div class="counter-value mono" id="waterCounter">0 L</div>
+    <div class="counter-sub">desde que abriste esta página</div>
+    <div class="counter-note">Estimación educativa basada en promedios de la industria, no una medición en tiempo real.</div>
+  </div>
+</header>
+
+<section id="informacion">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">¿Qué es y por qué importa?</div>
+      <h2>El almacenamiento en la nube tiene una huella física</h2>
+      <p>Guardar fotos, videos o documentos "en línea" significa enviarlos a un centro de datos: una nave industrial llena de miles de servidores que nunca se apagan. Mantener esos servidores funcionando y fríos tiene un costo ambiental medible.</p>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <span class="icon">⚡</span>
+        <span class="big">~1–1.5%</span>
+        <h3>del consumo eléctrico mundial</h3>
+        <p>Se estima que los centros de datos a nivel global consumen alrededor de este porcentaje de toda la electricidad producida en el planeta, y la cifra crece cada año con el uso de inteligencia artificial y video en streaming.</p>
+      </div>
+      <div class="stat-card">
+        <span class="icon">💧</span>
+        <span class="big">Millones de L</span>
+        <h3>de agua para refrigeración</h3>
+        <p>Los servidores generan calor constantemente. Muchos centros de datos usan agua dulce para enfriarlos, y un solo centro grande puede consumir volúmenes comparables al de un pueblo pequeño.</p>
+      </div>
+      <div class="stat-card">
+        <span class="icon">🌎</span>
+        <span class="big">CO₂</span>
+        <h3>huella de carbono</h3>
+        <p>Si la electricidad que alimenta esos centros proviene de combustibles fósiles, cada archivo respaldado, cada copia duplicada y cada video guardado "por si acaso" tiene asociada una emisión de carbono real.</p>
+      </div>
+    </div>
+
+    <div class="info-copy">
+      <p><strong>¿Por qué no lo notamos?</strong> Porque la nube está diseñada para sentirse invisible e ilimitada. No vemos el edificio, no vemos el cableado, no vemos el agua entrando y saliendo. Esa invisibilidad es parte del problema: es difícil cuidar un recurso cuyo costo no vemos.</p>
+      <p><strong>¿Qué podemos hacer?</strong> Pequeñas decisiones ayudan: borrar archivos duplicados o que ya no usamos, evitar respaldos automáticos innecesarios, elegir proveedores que reporten uso de energía renovable, y sobre todo, entender que "guardar en la nube" tiene un costo real en el mundo físico.</p>
+    </div>
+  </div>
+</section>
+
+<section id="reflexion" style="background:var(--bg-panel-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Espacio de opinión</div>
+      <h2>¿Qué tan importante crees que es este problema?</h2>
+      <p>Lee lo que han escrito otras personas y agrega tu propia reflexión. Se mostrará aquí mismo mientras navegas esta página.</p>
+    </div>
+
+    <div class="reflect-grid">
+      <div>
+        <div class="reflection-feed" id="reflectionFeed">
+          <div class="reflection-card">
+            <div class="who">Valeria, 16 años</div>
+            <p>Nunca había pensado que mis fotos duplicadas en la nube "gastan" algo real. Ahora borro lo que no uso.</p>
+          </div>
+          <div class="reflection-card">
+            <div class="who">Diego, 17 años</div>
+            <p>Creo que las empresas deberían mostrar cuánta energía usa nuestra cuenta, como una etiqueta de consumo.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="reflect-form">
+        <h3>Escribe tu reflexión</h3>
+        <p class="hint">Esto se agrega solo a esta sesión, para practicar la interacción.</p>
+        <label for="reflectName">Tu nombre (o apodo)</label>
+        <input type="text" id="reflectName" placeholder="Ej. Ana">
+        <label for="reflectText">Tu opinión</label>
+        <textarea id="reflectText" rows="4" placeholder="Escribe aquí lo que piensas sobre el impacto ambiental de la nube..."></textarea>
+        <button class="btn secondary" id="addReflectionBtn">Agregar mi reflexión</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="registro">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Súmate al registro</div>
+      <h2>Déjanos tu opinión de forma oficial</h2>
+      <p>Completa el formulario para que tu nombre, correo y opinión queden registrados automáticamente en nuestra base de datos.</p>
+    </div>
+
+    <form class="form-card" id="registerForm">
+      <div class="form-row">
+        <div>
+          <label for="name">Nombre <span class="required-mark">*</span></label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+          <label for="email">Correo electrónico <span class="required-mark">*</span></label>
+          <input type="email" id="email" name="email" required>
+        </div>
+      </div>
+      <label for="opinion">Tu opinión <span class="required-mark">*</span></label>
+  <textarea id="opinion" name="opinion" rows="4" required placeholder="¿Qué tan importante te parece cuidar el impacto ambiental de la"></textarea>
+  <button type="submit" class="btn" id="submitBtn">Enviar registro</button>
+  <div id="form-status"></div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  Práctica escolar · Impacto ambiental del almacenamiento en la nube
+</footer>
+
+<script>
+  // ---------- Contador visual de agua (decorativo/educativo) ----------
+  const waterCounterEl = document.getElementById('waterCounter');
+  const beakerFill = document.getElementById('beakerFill');
+  let litersUsed = 0;
+  const litersPerSecond = 0.4; // cifra ilustrativa para fines educativos
+
+  setInterval(() => {
+    litersUsed += litersPerSecond;
+    waterCounterEl.textContent = litersUsed.toFixed(1) + ' L';
+    const fillPercent = Math.min(18 + litersUsed * 0.6, 100);
+    beakerFill.style.height = fillPercent + '%';
+  }, 1000);
+
+  // ---------- Espacio de reflexión (solo en esta sesión) ----------
+  const reflectionFeed = document.getElementById('reflectionFeed');
+  const addReflectionBtn = document.getElementById('addReflectionBtn');
+
+  addReflectionBtn.addEventListener('click', () => {
+    const nameInput = document.getElementById('reflectName');
+    const textInput = document.getElementById('reflectText');
+    const name = nameInput.value.trim() || 'Anónimo';
+    const text = textInput.value.trim();
+
+    if (!text) {
+      textInput.focus();
+      return;
+    }
+
+    const card = document.createElement('div');
+    card.className = 'reflection-card';
+    card.innerHTML = `<div class="who">${escapeHtml(name)}</div><p>${escapeHtml(text)}</p>`;
+    reflectionFeed.prepend(card);
+
+    nameInput.value = '';
+    textInput.value = '';
+  });
+
+  function escapeHtml(str){
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  // ---------- Formulario conectado a Make (Webhook) ----------
+  const MAKE_WEBHOOK_URL = "https://hook.eu1.make.com/3bfjbr62xosb5glmcwombpq7ax35qj6j";
+
+  const form = document.getElementById('registerForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const statusBox = document.getElementById('form-status');
+  const opinionEl = document.getElementById('opinion');
+
+  // 🔹 Contador dinámico de palabras
+  opinionEl.addEventListener("input", () => {
+    const palabras = opinionEl.value.trim().split(/\s+/).filter(p => p.length > 0);
+    statusBox.textContent = "Palabras escritas: " + palabras.length + " / 100";
+    statusBox.className = ""; // limpia estilos previos
+  });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const opinionText = opinionEl.value.trim();
+    const palabras = opinionText.split(/\s+/).filter(p => p.length > 0);
+
+    if (palabras.length < 100) {
+      showStatus("Tu opinión debe tener al menos 100 palabras. Actualmente tienes " + palabras.length + ".", "err");
+      return;
+    }
+
+    const payload = {
+      name: document.getElementById('name').value.trim(),
+      email: document.getElementById('email').value.trim(),
+      opinion: opinionText,
+      submittedAt: new Date().toISOString()
+    };
+
+    if (!payload.name || !payload.email || !payload.opinion) {
+      showStatus('Por favor completa todos los campos obligatorios.', 'err');
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Enviando...';
+
+    try {
+      const response = await fetch(MAKE_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      if (response.ok) {
+        showStatus('¡Gracias! Tu opinión fue registrada correctamente. Revisa tu correo en unos minutos.', 'ok');
+        form.reset();
+        statusBox.textContent = ""; // limpia contador después de enviar
+      } else {
+        showStatus('Hubo un problema al enviar tu registro. Intenta de nuevo en un momento.', 'err');
+      }
+    } catch (err) {
+      showStatus('No se pudo conectar con el servidor. Verifica tu conexión e intenta de nuevo.', 'err');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Enviar registro';
+    }
+  });
+
+  function showStatus(message, type){
+    statusBox.textContent = message;
+    statusBox.className = type; // 'ok' o 'err'
+  }
+</script>
+
+</body>
+</html>
