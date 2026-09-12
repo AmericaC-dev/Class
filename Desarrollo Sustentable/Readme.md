@@ -32,7 +32,7 @@ Enumera todos los componentes usados:
 
 [Readme](Video/Readme.txt)
 
-[Ver video en YouTube]([https://youtube.com/shorts/nkt2cob0rXs?si=nZyfMq3l9rj_INTb]([https://www.youtube.com/watch?v=r36q2z-AkHk&sttick=0](https://youtube.com/shorts/nkt2cob0rXs?si=nZyfMq3l9rj_INTb))
+[Ver video en YouTube]([https://youtube.com/shorts/nkt2cob0rXs?si=nZyfMq3l9rj_INTb](https://youtube.com/shorts/nkt2cob0rXs?si=nZyfMq3l9rj_INTb)
 
 ## Evidencias de armado
 
@@ -50,7 +50,7 @@ Incluye:
 La práctica permitió aplicar el manejo de múltiples salidas digitales de forma simultánea y no bloqueante mediante millis(), a diferencia del uso de delay() que detendría todo el programa. También se puso en práctica la lectura de un botón con antirrebote por software y la generación de PWM por software para controlar el brillo de los LEDs sin usar pines PWM dedicados. El resultado fueron tres efectos visuales claramente diferenciados, controlables en tiempo real con una sola entrada digital.
 
 ## Resultados
-[Resultados _10leds.pdf](Resutados/Resultados _10leds.pdf)
+[Resultados _10leds.pdf](Resultados/Resultados _10leds.pdf)
 
 Este documento contiene la descripción de la práctica, objetivos y procedimientos realizados.
 
