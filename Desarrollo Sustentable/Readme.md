@@ -40,7 +40,7 @@ Enumera todos los componentes usados:
 
 ## Reporte
 Incluye:
-[Resultados_10LEDS.pdf](Reporte/Reporte_10LEDS.pdf)
+[Reporte_10LEDs.pdf](Reporte/Reporte_10LEDs.pdf)
 
 - Gráficas (insertar imagen o link)
 - Tablas de datos
@@ -50,7 +50,7 @@ Incluye:
 La práctica permitió aplicar el manejo de múltiples salidas digitales de forma simultánea y no bloqueante mediante millis(), a diferencia del uso de delay() que detendría todo el programa. También se puso en práctica la lectura de un botón con antirrebote por software y la generación de PWM por software para controlar el brillo de los LEDs sin usar pines PWM dedicados. El resultado fueron tres efectos visuales claramente diferenciados, controlables en tiempo real con una sola entrada digital.
 
 ## Resultados
-[Resultados_10leds.pdf](Resutados/Resultados_10leds.pdf)
+[Resultados _10leds.pdf](Resutados/Resultados _10leds.pdf)
 
 Este documento contiene la descripción de la práctica, objetivos y procedimientos realizados.
 
