@@ -10,6 +10,7 @@ como herramienta de apoyo didáctico para la materia de Desarrollo Sustentable.
 
 ## Material utilizado
 Enumera todos los componentes usados:
+
 -Make
 -Telegram
   
