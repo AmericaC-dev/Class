@@ -15,7 +15,7 @@ Enumera todos los componentes usados:
 -Telegram
   
 ## Código
-[led13.ino](Codigo/Ecologia Bot.blueprint.json)
+[Ecologia Bot.blueprint.json](<Codigo/Ecologia Bot.blueprint.json>)
 
 
 ## Imagenes
