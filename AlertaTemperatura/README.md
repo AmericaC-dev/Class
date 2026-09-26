@@ -19,6 +19,7 @@ Enumera todos los componentes usados:
   
 ## Código
 [Código Make](<Codigo/AlertaTemperatura.blueprint.json>)
+
 [Código Arduino iDE](<Codigo/leer_DTH11.ino>)
 
 
