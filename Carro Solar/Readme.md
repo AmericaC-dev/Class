@@ -23,11 +23,23 @@ Enumera todos los componentes usados:
 
   
 ## Imagenes
+Foto del proceso de pruebas del carrito
+
 <img src="Imagenes/foto_armado.jpeg" width="300">
+Foto del carrito ya armado
+
 <img src="Imagenes/foto_carrito.jpeg" width="300">
+Foto de los componentes de abajo del carrito
+
 <img src="Imagenes/foto_carrito_componentes.jpeg" width="300">
+Foto del proceso de pegado
+
 <img src="Imagenes/foto_pegado.jpeg" width="300">
+Foto proceso de armado de conexiones 
+
 <img src="Imagenes/foto_proceso.jpeg" width="300">
+Foto del proceso de soldado
+
 <img src="Imagenes/foto_soldar.jpeg" width="300">
 
 ## Resultados
