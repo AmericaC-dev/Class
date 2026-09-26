@@ -8,18 +8,18 @@ Construir un sistema de alerta automática que detecte temperatura elevada con u
 ## Material utilizado
 
 Enumera todos los componentes usados:
--Make
--Telegram
--Arduino IDE
--Arduino R4 Wifi
--Cables dupont
--Sensor DHT11
--Sensor 18B20
--Resistencia 4.7 ohms
+1. Make
+2. Telegram
+3. Arduino IDE
+4. Arduino R4 Wifi
+5. Cables dupont
+6. Sensor DHT11
+7. Sensor 18B20
+8. Resistencia 4.7 ohms
   
 ## Código
-[AlertaTemperatura.blueprint.json](<Codigo/AlertaTemperatura.blueprint.json>)
-[leer_DTH11.ino](<Codigo/leer_DTH11.ino>)
+[Código Make](<Codigo/AlertaTemperatura.blueprint.json>)
+[Código Arduino iDE](<Codigo/leer_DTH11.ino>)
 
 
 ## Imagenes
