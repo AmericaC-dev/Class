@@ -24,10 +24,20 @@ Enumera todos los componentes usados:
 
 
 ## Imagenes
+Foto Arduino IDE
+
 <img src="Imagenes/foto_ide.jpeg" width="300">
+Foto Demostracíon de Temperatura
+
 <img src="Imagenes/foto_ip.jpeg" width="300">
+Foto Arduino con sensor
+
 <img src="Imagenes/foto_sensor_arduino.jpeg" width="300">
+Foto Make
+
 <img src="Imagenes/make_alerta_foto.png" width="300">
+Foto Telegram
+
 <img src="Imagenes/telegram_alerta_foto.png" width="300">
 
 ## Resultados
