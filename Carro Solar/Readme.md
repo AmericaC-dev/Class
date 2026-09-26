@@ -6,6 +6,7 @@ El carrito está compuesto por una estructura de piezas de Lego que funciona com
 ## Objetivos de aprendizaje
 Construir un carrito autónomo capaz de desplazarse utilizando únicamente energía solar, integrando un panel fotovoltaico, motorreductores y una estructura mecánica funcional armada con piezas de Lego.
 
+## Materiales utilizados
 Enumera todos los componentes usados:
 1. Piezas de Lego (estructura)
 2. Panel solar de 5 volts
