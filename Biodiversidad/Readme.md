@@ -17,8 +17,11 @@ Enumera todos los componentes usados:
 
 ## Imagenes
 Foto del diagrama Make
+
 <img src="Imagenes/foto_Bio_make.jpeg" width="300">
+
 Foto Bot Telegram
+
 <img src="Imagenes/foto_Bio_tele.jpeg" width="300">
 
 ## Resultados
