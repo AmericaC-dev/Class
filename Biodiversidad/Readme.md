@@ -30,7 +30,7 @@ Incluye:
 
 
 ## Video del funcionamiento
-[Readme](Video/Readme.txt)
+[Readme](Video/readme.txt)
 
 [Ver video en YouTube](https://youtu.be/f2DGnhMxy2M)
 
