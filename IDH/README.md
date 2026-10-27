@@ -29,7 +29,7 @@ Foto Google sheets
 
 <img src="Imagenes/idh_foto.png" width="300">
 
-[Desarrollo humano, IDH, rezago social y desarrollo urbano y rural.docx](Imagenes/Desarrollo humano, IDH, rezago social y desarrollo urbano y rural.docx)
+[Imagenes](Imagenes/Investigacion.pdf)
 
 ## Resultados
 Incluye:
