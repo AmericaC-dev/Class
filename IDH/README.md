@@ -29,7 +29,7 @@ Foto Google sheets
 
 <img src="Imagenes/idh_foto.png" width="300">
 
-[Imagenes](Imagenes/Investigacion.pdf)
+[Investigacion](Imagenes/Investigacion.pdf)
 
 ## Resultados
 Incluye:
@@ -39,7 +39,7 @@ Incluye:
 ## Video del funcionamiento
 [Readme](Video/readme.txt)
 
-[Ver video en YouTube]([https://youtu.be/dlbZfRPe83c](https://youtu.be/2337rGU2ZvI))
+[Ver video en YouTube](https://youtu.be/dlbZfRPe83c](https://youtu.be/2337rGU2ZvI)
 
 
 
