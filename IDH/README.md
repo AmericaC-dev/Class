@@ -10,41 +10,38 @@ Interpretar el Índice de Desarrollo Humano (IDH) y sus componentes para las ent
 ## Material utilizado
 Enumera todos los componentes usados:
 1. Make
+2. Word
    
   
 ## Código
-[Buzon ambiental.blueprint.json](<Codigo/Buzon ambiental.blueprint.json>)
+[IDH_Estados.blueprint.json](<Codigo/IDH_Estados.blueprint.json>)
 
 
 ## Imagenes
 Foto del diagrama Make
 
-<img src="Imagenes/make_buzon_foto.png" width="300">
-
-Foto Bot Telegram
-
-<img src="Imagenes/telegram_buzon_foto.png" width="300">
+<img src="Imagenes/foto_make_idh.png" width="300">
 
 Foto Google sheets
 
-<img src="Imagenes/Google_sheets_buzon_foto.png" width="300">
+<img src="Imagenes/foto_googleSheets.png" width="300">
 
-Foto act. 1
 
-<img src="Imagenes/act1_foto_buzon.png" width="300">
+<img src="Imagenes/idh_foto.png" width="300">
+
+[Desarrollo humano, IDH, rezago social y desarrollo urbano y rural.docx](Imagenes/Desarrollo humano, IDH, rezago social y desarrollo urbano y rural.docx)
 
 ## Resultados
 Incluye:
-[Resultados](Resultados/Resultado_Buzon_Ciudadano.pdf)
+[Resultados](Resultados/Resultado_IDH_de_mi_estado.pdf)
 
 
 ## Video del funcionamiento
 [Readme](Video/readme.txt)
 
-[Ver video en YouTube](https://youtu.be/dlbZfRPe83c)
+[Ver video en YouTube]([https://youtu.be/dlbZfRPe83c](https://youtu.be/2337rGU2ZvI))
 
 
 
 ## Conclusiones
-La práctica cumple su objetivo: se construyó un buzón ciudadano automatizado que registra reportes ambientales con folio, fecha y usuario, y que responde al ciudadano con un comprobante. Al compararlo con los sistemas oficiales se identificó que su principal limitación es que no cuenta con una autoridad que lo atienda ni con plazos de respuesta, lo que muestra que la tecnología facilita la participación, pero no sustituye la responsabilidad de las instituciones.
-
+La práctica cumple su objetivo: se construyó una página que consulta el IDH de cada entidad mediante Make y un agente de IA, y se interpretó el caso de Sinaloa, con un IDH de 0.757 (lugar 11 de 32), fortaleza en educación y rezago en salud. Se identificó que las principales limitaciones son que los datos son de 2012, que el promedio estatal oculta diferencias entre zonas urbanas y rurales y que la IA puede equivocarse, lo que muestra que la tecnología facilita el acceso a la información, pero no sustituye la verificación ni la responsabilidad de quien toma decisiones.
