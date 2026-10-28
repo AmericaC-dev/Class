@@ -1,0 +1,576 @@
+{
+    "name": "Clasificacion de residuos",
+    "flow": [
+        {
+            "id": 1,
+            "module": "telegram:WatchUpdates",
+            "version": 1,
+            "parameters": {
+                "__IMTHOOK__": 3996969
+            },
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": -451,
+                    "y": -7
+                },
+                "restore": {
+                    "parameters": {
+                        "__IMTHOOK__": {
+                            "data": {
+                                "editable": "false"
+                            },
+                            "label": "Clasificador residuos"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTHOOK__",
+                        "type": "hook:telegramapi",
+                        "label": "Webhook",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 5,
+            "module": "builtin:BasicRouter",
+            "version": 1,
+            "mapper": null,
+            "metadata": {
+                "designer": {
+                    "x": -151,
+                    "y": -7
+                }
+            },
+            "routes": [
+                {
+                    "flow": [
+                        {
+                            "id": 2,
+                            "module": "telegram:DownloadFile",
+                            "version": 1,
+                            "parameters": {
+                                "__IMTCONN__": 12469000
+                            },
+                            "filter": {
+                                "name": "Con foto",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{1.message.photo}}",
+                                            "o": "exist"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "fileId": "{{last(map(1.message.photo; \"file_id\"))}}"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 149,
+                                    "y": -150
+                                },
+                                "restore": {
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "telegram"
+                                            },
+                                            "extra": {
+                                                "data": {
+                                                    "scoped": "true",
+                                                    "connection": "telegram"
+                                                },
+                                                "label": "Clasificador residuos"
+                                            },
+                                            "label": "Clasificador residuos"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:telegram",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "fileId",
+                                        "type": "text",
+                                        "label": "File ID",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 3,
+                            "module": "ai-local-agent:RunLocalAIAgent",
+                            "version": 0,
+                            "parameters": {
+                                "makeConnectionId": 10326816
+                            },
+                            "mapper": {
+                                "files": [
+                                    {
+                                        "data": "{{2.fileOutput}}",
+                                        "fileName": "{{2.fileName}}"
+                                    }
+                                ],
+                                "message": "Clasifica el residuo de la imagen.",
+                                "threadId": "",
+                                "outputType": "text",
+                                "tokenLimit": "100",
+                                "modelConfig": {
+                                    "timeout": "",
+                                    "recursionLimit": "300",
+                                    "aiCompactionEnabled": true,
+                                    "iterationsFromHistoryCount": "10"
+                                },
+                                "defaultModel": "medium",
+                                "systemPrompt": "Eres un asesor de separación de residuos para alumnos de Desarrollo Sustentable del TecNM en Mazatlán, Sinaloa. Recibirás la foto de un residuo y debes ayudar a clasificarlo correctamente.\r\n\r\nPASO 1: EVALÚA LA IMAGEN\r\nAntes de clasificar, revisa mentalmente si la foto tiene problemas de calidad: poca luz, sobreexposición, reflejos (frecuentes en plásticos, latas y envolturas brillantes), desenfoque, fondo desordenado u objeto parcialmente cubierto o muy lejano.\r\n\r\nEstos problemas NO significan automáticamente que debas rechazar la foto. Haz lo siguiente:\r\n- Si el objeto se distingue aunque la foto sea oscura o brillante, usa formas, textura, color, etiquetas visibles, logotipos y símbolos de reciclaje para identificarlo.\r\n- Si hay varios objetos, identifica el más grande o el que está al centro. Si no está claro cuál es el residuo principal, menciónalo en la línea de Residuo.\r\n- Si solo puedes identificar el objeto con duda razonable, da tu mejor estimación e indícalo en la línea \"Confianza\".\r\n\r\nPASO 2: RESPONDE\r\nResponde en texto plano (sin asteriscos, sin markdown, sin viñetas), en español, con este formato exacto:\r\n\r\nResiduo: [qué es]\r\nMaterial: [material principal; si hay varios, menciona cuál predomina]\r\nClasificación: [orgánico / inorgánico reciclable / inorgánico no reciclable / manejo especial o peligroso]\r\n¿Se recicla?: [sí / no / depende, con una línea de explicación]\r\nDónde va: [contenedor o lugar de acopio]\r\nTiempo aproximado de degradación: [tiempo]\r\nConsejo: [1 línea para reducir o reutilizar este residuo]\r\nConfianza: [alta / media / baja, y si es media o baja, indica qué parte de la foto generó la duda, por ejemplo: \"la foto está oscura y no distingo si es PET o vidrio\"]\r\n\r\nCASOS ESPECIALES\r\n- Si la confianza es media o baja, termina agregando una línea: \"Para confirmar, envía otra foto con más luz natural, sin flash directo y con el objeto sobre un fondo liso.\"\r\n- Si el material tiene dos posibilidades con tratamiento distinto (por ejemplo PET vs. vidrio, o aluminio vs. hojalata), indica ambas opciones y cuál es más probable.\r\n- Si la imagen no muestra un residuo, está completamente negra o blanca, o es imposible distinguir cualquier objeto, responde únicamente: \"No pude identificar el residuo. Envía otra foto con buena iluminación (de preferencia luz natural), sin flash directo, con el objeto centrado y sobre un fondo liso.\"\r\n- Si es un residuo peligroso (pilas, baterías, medicamentos, aceite, solventes, pinturas, focos fluorescentes, aerosoles, químicos, electrónicos), indícalo en la clasificación como manejo especial o peligroso, recomienda NO tirarlo a la basura común y señala el tipo de lugar de acopio adecuado (centro de acopio autorizado, punto de recolección de la institución o del municipio). No inventes nombres ni direcciones de centros de acopio específicos.\r\n- Si el residuo está contaminado (envase con restos de comida, papel con grasa), indícalo en \"¿Se recicla?\" y explica cómo prepararlo (enjuagar, escurrir) o por qué ya no es reciclable.\r\n\r\nREGLAS\r\n- No inventes datos que no puedas ver. Si hay una marca, número de resina o símbolo ilegible, no lo menciones como si lo hubieras leído.\r\n- Los tiempos de degradación son aproximados; usa rangos cuando haga falta.\r\n- Mantén un tono claro y breve, apropiado para estudiantes universitarios.",
+                                "promptCaching": "none",
+                                "fallbackEnabled": false
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 449,
+                                    "y": -150
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "files": {
+                                            "mode": "chose",
+                                            "items": [
+                                                null
+                                            ]
+                                        },
+                                        "outputType": {
+                                            "label": "Text"
+                                        },
+                                        "defaultModel": {
+                                            "mode": "chose",
+                                            "label": "MediumModel: gpt-5-nano. Reasoning: low. A balanced, quick choice for clearly defined tasks needing reliable answers rather than deep analysis"
+                                        },
+                                        "promptCaching": {
+                                            "label": "Automatic (always on)"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "makeConnectionId": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "ai-provider"
+                                            },
+                                            "label": "Make's AI Provider (default)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "makeConnectionId",
+                                        "type": "account:ai-provider,openai-gpt-3,anthropic-claude,gemini-ai-q9zyjp,ai-agent-foundry-openai,ai-agent-foundry-non-openai,mistral-ai,cohere,groq,ai-agent-xai,amazon-bedrock,ai-agent-openai-compatible",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "defaultModel",
+                                        "type": "select",
+                                        "label": "Model",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "tokenLimit",
+                                        "type": "number",
+                                        "label": "Maximum output length (%)",
+                                        "validate": {
+                                            "max": 100,
+                                            "min": 20
+                                        }
+                                    },
+                                    {
+                                        "name": "promptCaching",
+                                        "type": "select",
+                                        "label": "Prompt caching",
+                                        "validate": {
+                                            "enum": [
+                                                "none"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "fallbackEnabled",
+                                        "type": "boolean",
+                                        "label": "Enable fallback connection",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "systemPrompt",
+                                        "type": "text",
+                                        "label": "Instructions"
+                                    },
+                                    {
+                                        "name": "message",
+                                        "type": "text",
+                                        "label": "Input",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "files",
+                                        "spec": [
+                                            {
+                                                "name": "fileName",
+                                                "type": "filename",
+                                                "label": "File name",
+                                                "semantic": "file:name"
+                                            },
+                                            {
+                                                "name": "data",
+                                                "type": "buffer",
+                                                "label": "Data",
+                                                "semantic": "file:data"
+                                            }
+                                        ],
+                                        "type": "array",
+                                        "label": "Input files"
+                                    },
+                                    {
+                                        "name": "threadId",
+                                        "type": "text",
+                                        "label": "Conversation ID",
+                                        "validate": {
+                                            "max": 256
+                                        }
+                                    },
+                                    {
+                                        "name": "modelConfig",
+                                        "spec": [
+                                            {
+                                                "name": "recursionLimit",
+                                                "type": "number",
+                                                "label": "Steps per agent call"
+                                            },
+                                            {
+                                                "name": "iterationsFromHistoryCount",
+                                                "type": "number",
+                                                "label": "Maximum conversation history"
+                                            },
+                                            {
+                                                "name": "timeout",
+                                                "type": "number",
+                                                "label": "Step timeout",
+                                                "validate": {
+                                                    "max": 600,
+                                                    "min": 120
+                                                }
+                                            },
+                                            {
+                                                "name": "aiCompactionEnabled",
+                                                "type": "boolean",
+                                                "label": "Enable compaction",
+                                                "required": true
+                                            }
+                                        ],
+                                        "type": "collection",
+                                        "label": "Model configuration"
+                                    },
+                                    {
+                                        "name": "outputType",
+                                        "type": "select",
+                                        "label": "Response format",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "text",
+                                                "make-schema",
+                                                "udt-schema"
+                                            ]
+                                        }
+                                    }
+                                ]
+                            },
+                            "tools": []
+                        },
+                        {
+                            "id": 4,
+                            "module": "telegram:SendReplyMessage",
+                            "version": 1,
+                            "parameters": {
+                                "__IMTCONN__": 12469000
+                            },
+                            "mapper": {
+                                "text": "{{3.response}}",
+                                "chatId": "{{1.message.chat.id}}",
+                                "parseMode": "",
+                                "replyMarkup": "",
+                                "messageThreadId": "",
+                                "replyToMessageId": "",
+                                "replyMarkupAssembleType": "reply_markup_enter"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 749,
+                                    "y": -150
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "parseMode": {
+                                            "label": "Empty"
+                                        },
+                                        "disableNotification": {
+                                            "mode": "chose"
+                                        },
+                                        "replyMarkupAssembleType": {
+                                            "label": "Enter the Reply Markup"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "telegram"
+                                            },
+                                            "label": "Clasificador residuos"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:telegram",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "chatId",
+                                        "type": "text",
+                                        "label": "Chat ID",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "text",
+                                        "type": "text",
+                                        "label": "Text",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "messageThreadId",
+                                        "type": "number",
+                                        "label": "Message Thread ID"
+                                    },
+                                    {
+                                        "name": "parseMode",
+                                        "type": "select",
+                                        "label": "Parse Mode",
+                                        "validate": {
+                                            "enum": [
+                                                "Markdown",
+                                                "HTML"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "disableNotification",
+                                        "type": "boolean",
+                                        "label": "Disable Notifications"
+                                    },
+                                    {
+                                        "name": "disableWebPagePreview",
+                                        "type": "boolean",
+                                        "label": "Disable Link Previews"
+                                    },
+                                    {
+                                        "name": "replyToMessageId",
+                                        "type": "number",
+                                        "label": "Original Message ID"
+                                    },
+                                    {
+                                        "name": "replyMarkupAssembleType",
+                                        "type": "select",
+                                        "label": "Enter/Assemble the Reply Markup Field",
+                                        "validate": {
+                                            "enum": [
+                                                "reply_markup_enter",
+                                                "reply_markup_assemble"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "replyMarkup",
+                                        "type": "text",
+                                        "label": "Reply Markup"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 6,
+                            "module": "telegram:SendReplyMessage",
+                            "version": 1,
+                            "parameters": {
+                                "__IMTCONN__": 12469000
+                            },
+                            "filter": {
+                                "name": "Sin foto",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{1.message.photo}}",
+                                            "o": "notexist"
+                                        },
+                                        {
+                                            "a": "{{1.message.chat.id}}",
+                                            "o": "exist"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "text": "Hola, para clasificar un residuo necesito una foto. Envíame una imagen del objeto, de preferencia con buena luz natural, sin flash directo y sobre un fondo liso.",
+                                "chatId": "{{1.message.chat.id}}",
+                                "parseMode": "",
+                                "replyMarkup": "",
+                                "messageThreadId": "",
+                                "replyToMessageId": "",
+                                "replyMarkupAssembleType": "reply_markup_enter"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 149,
+                                    "y": 150
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "parseMode": {
+                                            "label": "Empty"
+                                        },
+                                        "disableNotification": {
+                                            "mode": "chose"
+                                        },
+                                        "replyMarkupAssembleType": {
+                                            "label": "Enter the Reply Markup"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "telegram"
+                                            },
+                                            "label": "Clasificador residuos"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:telegram",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "chatId",
+                                        "type": "text",
+                                        "label": "Chat ID",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "text",
+                                        "type": "text",
+                                        "label": "Text",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "messageThreadId",
+                                        "type": "number",
+                                        "label": "Message Thread ID"
+                                    },
+                                    {
+                                        "name": "parseMode",
+                                        "type": "select",
+                                        "label": "Parse Mode",
+                                        "validate": {
+                                            "enum": [
+                                                "Markdown",
+                                                "HTML"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "disableNotification",
+                                        "type": "boolean",
+                                        "label": "Disable Notifications"
+                                    },
+                                    {
+                                        "name": "disableWebPagePreview",
+                                        "type": "boolean",
+                                        "label": "Disable Link Previews"
+                                    },
+                                    {
+                                        "name": "replyToMessageId",
+                                        "type": "number",
+                                        "label": "Original Message ID"
+                                    },
+                                    {
+                                        "name": "replyMarkupAssembleType",
+                                        "type": "select",
+                                        "label": "Enter/Assemble the Reply Markup Field",
+                                        "validate": {
+                                            "enum": [
+                                                "reply_markup_enter",
+                                                "reply_markup_assemble"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "replyMarkup",
+                                        "type": "text",
+                                        "label": "Reply Markup"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "metadata": {
+        "instant": true,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "eu1.make.com",
+        "notes": []
+    }
+}
