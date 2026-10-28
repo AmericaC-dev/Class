@@ -11,6 +11,8 @@ Interpretar el Índice de Desarrollo Humano (IDH) y sus componentes para las ent
 Enumera todos los componentes usados:
 1. Make
 2. Word
+3. Claude
+4. Informe PNUD
    
   
 ## Código
@@ -19,7 +21,7 @@ Enumera todos los componentes usados:
 [Index.html](<Codigo/Index.html>)
 
 Mi pagina ya publicada:
-[Ver video en YouTube]([https://youtu.be/2337rGU2ZvI](https://americac-dev.github.io/Class/IDH/))
+[Ver pagina](https://americac-dev.github.io/Class/IDH/)
 ## Imagenes
 Foto del diagrama Make
 
