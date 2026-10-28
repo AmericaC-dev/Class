@@ -19,25 +19,28 @@ setWebhook).
    
   
 ## Código
-[](<Codigo/>)
-
-[l](<Codigo/>)
+[Clasificacion de residuos.blueprin](<Codigo/Clasificacion de residuos.blueprin>)
 
 
 
 ## Imagenes
 
+Foto de las 10 pruebas en google sheets
 
-<img src="Imagenes/" width="300">
+<img src="Imagenes/foto_google_sheets_prueba.png" width="300">
+
+Foto make
+
+<img src="Imagenes/foto_make_clasificacion.png" width="300">
+
+Foto de la prueba en telegram
+
+<img src="Imagenes/foto_telegram_clasificacion.png" width="300">
+
+[Residuos pdf](Imagenes/Residuos%20en%20M%C3%A9xico%20y%20Mazatl%C3%A1n.pdf)
 
 
-<img src="Imagenes/" width="300">
-
-
-<img src="Imagenes/" width="300">
-
-
-
+[Pruebas con 10 residuos](Imagenes/Pruebas%20con%2010%20residuos%20-%20Sheet1.csv)
 ## Resultados
 Incluye:
 [Resultados](Resultados/)
@@ -51,4 +54,4 @@ Incluye:
 
 
 ## Conclusiones
-La práctica cumple su objetivo: se construyó una página que consulta el IDH de cada entidad mediante Make y un agente de IA, y se interpretó el caso de Sinaloa, con un IDH de 0.757 (lugar 11 de 32), fortaleza en educación y rezago en salud. Se identificó que las principales limitaciones son que los datos son de 2012, que el promedio estatal oculta diferencias entre zonas urbanas y rurales y que la IA puede equivocarse, lo que
+
