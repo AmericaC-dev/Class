@@ -54,4 +54,4 @@ Incluye:
 
 
 ## Conclusiones
-
+La práctica cumple su objetivo: se construyó un clasificador de residuos por foto con Telegram, Make y un agente de IA con visión, y se evaluó su precisión comparándolo con fuentes oficiales. Se identificó que una parte importante de los residuos de uso diario no se recicla de forma sencilla, que tardan décadas o siglos en degradarse y que en Mazatlán llegan al estero y a las playas en forma de plásticos y microplásticos, mientras la ciudad enfrenta el problema de un basurón sin relleno sanitario definido. También quedó claro que la IA es una ayuda para orientar la separación, pero no sustituye la verificación ni la responsabilidad compartida entre ciudadanos, municipio y empresas.
