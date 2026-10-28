@@ -19,7 +19,7 @@ setWebhook).
    
   
 ## Código
-[Clasificacion de residuos.blueprin](<Codigo/Clasificacion de residuos.blueprin>)
+[Clasificacion de residuos.blueprin](<Codigo/Clasificacion de residuos.blueprint.json>)
 
 
 
@@ -43,7 +43,7 @@ Foto de la prueba en telegram
 [Pruebas con 10 residuos](Imagenes/Pruebas%20con%2010%20residuos%20-%20Sheet1.csv)
 ## Resultados
 Incluye:
-[Resultados](Resultados/Resultado_Clasificador_de_residuos.)
+[Resultados](Resultados/Resultado_Clasificador_de_residuos.pdf)
 
 
 ## Video del funcionamiento
