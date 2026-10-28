@@ -37,10 +37,10 @@ Foto de la prueba en telegram
 
 <img src="Imagenes/foto_telegram_clasificacion.png" width="300">
 
-[Residuos pdf](Imagenes/Residuos%20en%20M%C3%A9xico%20y%20Mazatl%C3%A1n.pdf)
+[Residuos pdf](Imagenes/Residuos_en_México_y_Mazatlán_clasificación,_manejo_e_impacto_en_el_mar.pdf)
 
 
-[Pruebas con 10 residuos](Imagenes/Pruebas%20con%2010%20residuos%20-%20Sheet1.csv)
+[Pruebas con 10 residuos](Imagenes/Pruebas_con_10_residuos.pdf)
 ## Resultados
 Incluye:
 [Resultados](Resultados/Resultado_Clasificador_de_residuos.pdf)
