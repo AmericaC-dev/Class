@@ -16,7 +16,10 @@ Enumera todos los componentes usados:
 ## Código
 [IDH_Estados.blueprint.json](<Codigo/IDH_Estados.blueprint.json>)
 
+[Index.html](<Codigo/Index.html>)
 
+Mi pagina ya publicada:
+[Ver video en YouTube]([https://youtu.be/2337rGU2ZvI](https://americac-dev.github.io/Class/IDH/))
 ## Imagenes
 Foto del diagrama Make
 
