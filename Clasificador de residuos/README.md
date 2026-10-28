@@ -43,7 +43,7 @@ Foto de la prueba en telegram
 [Pruebas con 10 residuos](Imagenes/Pruebas%20con%2010%20residuos%20-%20Sheet1.csv)
 ## Resultados
 Incluye:
-[Resultados](Resultados/)
+[Resultados](Resultados/Resultado_Clasificador_de_residuos.)
 
 
 ## Video del funcionamiento
