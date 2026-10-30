@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Noticias climáticas del día</title>
+<style>
+  :root {
+    --bosque: #1f4d3a;
+    --hoja: #3f8f5f;
+    --musgo: #e4eedc;
+    --mar: #1d6f7a;
+    --arena: #f6f8f1;
+    --tinta: #17261f;
+    --borde: #c5d6bf;
+    --error: #a63a2b;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    background: var(--arena);
+    color: var(--tinta);
+    line-height: 1.6;
+  }
+  header {
+    background: linear-gradient(135deg, var(--bosque), var(--mar));
+    color: #fff;
+    padding: 2.5rem 1.25rem 2rem;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; }
+  h1 { margin: 0 0 .5rem; font-size: clamp(1.8rem, 5vw, 2.6rem); line-height: 1.15; }
+  header p { margin: 0; max-width: 60ch; opacity: .92; }
+  main { padding: 1.75rem 1.25rem 3rem; }
+  .panel {
+    background: #fff;
+    border: 1px solid var(--borde);
+    border-radius: 10px;
+    padding: 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+    align-items: flex-end;
+  }
+  .campo { flex: 1 1 260px; display: flex; flex-direction: column; gap: .35rem; }
+  label { font-weight: bold; font-size: .95rem; }
+  select, button { font: inherit; border-radius: 8px; padding: .65rem .85rem; }
+  select { border: 1px solid var(--borde); background: var(--arena); color: var(--tinta); }
+  button {
+    border: 0;
+    background: var(--hoja);
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    min-width: 150px;
+  }
+  button:hover:not(:disabled) { background: var(--bosque); }
+  button:disabled { opacity: .6; cursor: wait; }
+  :focus-visible { outline: 3px solid var(--mar); outline-offset: 2px; }
+  #resultados { margin-top: 1.5rem; display: none; }
+  #resultados h2 { font-size: 1.2rem; margin: 0 0 .6rem; color: var(--bosque); }
+  #fecha { font-weight: normal; color: var(--mar); }
+  #caja {
+    background: var(--musgo);
+    border-left: 5px solid var(--hoja);
+    border-radius: 6px;
+    padding: 1.1rem 1.25rem;
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+  }
+  #caja.error { background: #fbeae6; border-left-color: var(--error); color: var(--error); }
+  #caja a { color: var(--mar); font-weight: bold; }
+  footer { text-align: center; font-size: .85rem; color: #5b6b62; padding: 0 1.25rem 2rem; }
+  @media (max-width: 480px) { button { width: 100%; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Noticias climáticas del día</h1>
+    <p>Esta página muestra un resumen de las noticias ambientales más recientes, explicado por inteligencia artificial. Elige un tema y revisa siempre las fuentes originales.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="panel">
+    <div class="campo">
+      <label for="tema">Tema</label>
+      <select id="tema">
+        <option>cambio climático</option>
+        <option>deforestación México</option>
+        <option>reciclaje</option>
+        <option>energías renovables México</option>
+        <option>sequía Sinaloa</option>
+        <option>Mazatlán medio ambiente</option>
+      </select>
+    </div>
+    <button id="btn" type="button">Ver noticias</button>
+  </div>
+
+  <section id="resultados" aria-live="polite">
+    <h2>Resultados del <span id="fecha"></span></h2>
+    <div id="caja"></div>
+  </section>
+</main>
+
+<footer>Resumen generado con IA a partir de Google News. Puede contener errores: verifica en la fuente.</footer>
+
+<script>
+  // Pega aquí la URL de tu webhook de Make
+  const WEBHOOK_URL = "https://hook.eu1.make.com/xo58g5ybzripuhmgtnikw4nw7falfnow";
+
+  const btn = document.getElementById("btn");
+  const caja = document.getElementById("caja");
+  const resultados = document.getElementById("resultados");
+
+  document.getElementById("fecha").textContent =
+    new Date().toLocaleDateString("es-MX", { day: "numeric", month: "long", year: "numeric" });
+
+  function mostrarTexto(texto) {
+    caja.textContent = "";
+    texto.split("\n").forEach((linea, i, arr) => {
+      if (linea.trim().startsWith("http")) {
+        const a = document.createElement("a");
+        a.href = linea.trim();
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.textContent = linea.trim();
+        caja.appendChild(a);
+      } else {
+        caja.appendChild(document.createTextNode(linea));
+      }
+      if (i < arr.length - 1) caja.appendChild(document.createTextNode("\n"));
+    });
+  }
+
+  btn.addEventListener("click", async () => {
+    const tema = document.getElementById("tema").value;
+    btn.disabled = true;
+    resultados.style.display = "block";
+    caja.className = "";
+    caja.textContent = "Buscando y resumiendo noticias...";
+    try {
+      const resp = await fetch(WEBHOOK_URL, {
+        method: "POST",
+        body: new URLSearchParams({ tema: tema })
+      });
+      if (!resp.ok) throw new Error("HTTP " + resp.status);
+      mostrarTexto(await resp.text());
+    } catch (e) {
+      caja.className = "error";
+      caja.textContent = "No se pudieron obtener las noticias, intenta de nuevo.";
+    } finally {
+      btn.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>
