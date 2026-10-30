@@ -37,7 +37,7 @@ Foto pagina
 
 <img src="Imagenes/foto_resultado_generaciones.png" width="300">
 
-[Actividad 1](Imagenes/Actividad_1.docx)
+[Actividad 1](Imagenes/Actividad_1.pdf)
 
 ## Resultados
 Incluye:
