@@ -42,7 +42,7 @@ Incluye:
 ## Video del funcionamiento
 [Readme](Video/readme.txt)
 
-[Ver video en YouTube]()
+[Ver video en YouTube](https://youtu.be/JvzdPMhRoKE)
 
 
 
