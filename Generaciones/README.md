@@ -21,7 +21,7 @@ edad.
 ## Código
 [Generaciones.blueprint.json](<Codigo/Generaciones.blueprint.json>)
 
-[Index.html](<Codigo/Index.html>)
+[Index.html](<Codigo/index.html>)
 
 Mi pagina ya publicada:
 [Ver pagina](https://americac-dev.github.io/Class/Generaciones/Codigo/index.html)
