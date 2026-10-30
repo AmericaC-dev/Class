@@ -1,7 +1,7 @@
 # Nombre del proyecto
 Estilos de vida entre generaciones
 ## Descripción
-
+“Estilos de vida entre generaciones” es una página web de un solo archivo HTML, con CSS y JavaScript incluidos, en la que se capturan las respuestas de tres personas a las mismas 8 preguntas sobre sus hábitos de consumo: cómo se conseguía la comida, qué se hacía con la ropa y los zapatos viejos, qué aparatos electrónicos se tenían y cada cuánto se cambiaban, cómo se transportaban, qué se hacía con la basura, si usaban bolsas, botellas o envases desechables, cómo se cuidaba el agua y qué consideran necesario para vivir bien. Cada una de las tres secciones (Abuelo/a, Padre/Madre y Amigo/a) tiene un campo de edad y un área de texto por pregunta. Antes de enviar, la página verifica que todos los campos estén llenos y, si falta alguno, muestra un aviso.
 ## Objetivos de aprendizaje
 Que el alumno distinga los estilos de vida y de consumo de tres generaciones de su entorno, construya
 sin programar una página web conectada a Make e IA para comparar sus respuestas, y formule
