@@ -41,16 +41,16 @@ Foto pagina
 
 ## Resultados
 Incluye:
-[Resultados](Resultados/)
+[Resultados](Resultados/Resultado_Estilo_de_vida_entre_generaciones.pdf)
 
 
 ## Video del funcionamiento
 [Readme](Video/readme.txt)
 
-[Ver video en YouTube]()
+[Ver video en YouTube](https://youtu.be/WVaZjYZHMxU)
 
 
 
 ## Conclusiones
-
+La práctica cumple su objetivo: se entrevistó a tres generaciones, se construyó una página web conectada a Make y a un agente de IA que compara sus respuestas, y se formularon conclusiones propias sobre la sustentabilidad de sus hábitos. Se identificó que los hábitos más sustentables eran los de las generaciones anteriores, pero por necesidad, y que el consumo actual es más rápido y desechable por la publicidad, la tecnología, el ingreso y el crecimiento de la ciudad. También quedó claro que la IA es una herramienta útil para comparar y ordenar la información, pero no sustituye el criterio propio ni el contexto local, y que recuperar hábitos como reparar, reutilizar y cuidar el agua es una forma concreta de aplicar los principios de la Carta de la Tierra y la Agenda 21.
 
