@@ -3,9 +3,9 @@ Noticias climáticas del día
 ## Descripción
 
 ## Objetivos de aprendizaje
-Que el alumno distinga los estilos de vida y de consumo de tres generaciones de su entorno, construya
-sin programar una página web conectada a Make e IA para comparar sus respuestas, y formule
-conclusiones propias sobre la sustentabilidad de esos hábitos.
+Que el alumno construya sin programar una herramienta de difusión ambiental que obtenga noticias
+recientes mediante RSS, las resuma con IA y las muestre en una página web, verificando que los
+resúmenes sean fieles a sus fuentes.
 
 ## Material utilizado
 Enumera todos los componentes usados:
@@ -14,42 +14,34 @@ Enumera todos los componentes usados:
 API key.
 • Cuenta en una IA generativa gratuita para generar la página.
 • Cuenta de GitHub con su repositorio de prácticas.
-• Tres personas para entrevistar: un abuelo o abuela, un padre o madre y un amigo o amiga de su
-edad.
    
-  
 ## Código
-[Generaciones.blueprint.json](<Codigo/Generaciones.blueprint.json>)
+[Noticias_Climaticas.blueprint.json](<Codigo/Noticias_Climaticas.blueprint.json>)
 
 [Index.html](<Codigo/index.html>)
 
 Mi pagina ya publicada:
-[Ver pagina](https://americac-dev.github.io/Class/Generaciones/Codigo/index.html)
+[Ver pagina](https://americac-dev.github.io/Class/Noticias%20Climaticas/Codigo/index.html)
 ## Imagenes
 Foto del diagrama Make
 
-<img src="Imagenes/foto_make_generaciones.png" width="300">
+<img src="Imagenes/foto_make_noticias.png" width="300">
 
 Foto pagina
 
-<img src="Imagenes/foto_pag_generaciones.png" width="300">
+<img src="Imagenes/foto_pagina_noticias.png" width="300">
 
-
-<img src="Imagenes/foto_resultado_generaciones.png" width="300">
-
-[Actividad 1](Imagenes/Actividad_1.pdf)
 
 ## Resultados
 Incluye:
-[Resultados](Resultados/Resultado_Estilo_de_vida_entre_generaciones.pdf)
+[Resultados](Resultados/)
 
 
 ## Video del funcionamiento
 [Readme](Video/readme.txt)
 
-[Ver video en YouTube](https://youtu.be/WVaZjYZHMxU)
+[Ver video en YouTube]()
 
 
 
 ## Conclusiones
-La práctica cumple su objetivo: se entrevistó a tres generaciones, se construyó una página web conectada a Make y a un agente de IA que compara sus respuestas, y se formularon conclusiones propias sobre la sustentabilidad de sus hábitos. Se identificó que los hábitos más sustentables eran los de las generaciones anteriores, pero por necesidad, y que el consumo actual es más rápido y desechable por la publicidad, la tecnología, el ingreso y el crecimiento de la ciudad. También quedó claro que la IA es una herramienta útil para comparar y ordenar la información, pero no sustituye el criterio propio ni el contexto local, y que recuperar hábitos como reparar, reutilizar y cuidar el agua es una forma concreta de aplicar los principios de la Carta de la Tierra y la Agenda 21.
