@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculadora de huella ecologica</title>
+<style>
+  :root {
+    --tinta: #0f2e2a;
+    --manglar: #1f5c4f;
+    --mar: #2f8f83;
+    --espuma: #e3f1ec;
+    --arena: #f3f7f4;
+    --borde: #bcd5cc;
+    --alerta: #9b2c2c;
+    --texto: #16322d;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    color: var(--texto);
+    background: var(--arena);
+    line-height: 1.55;
+  }
+  header {
+    background: var(--tinta);
+    color: #f1f8f5;
+    padding: 56px 20px 48px;
+  }
+  .contenedor { max-width: 720px; margin: 0 auto; }
+  h1 {
+    font-size: clamp(2rem, 6vw, 3.2rem);
+    line-height: 1.1;
+    margin: 0 0 16px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  header p { margin: 0; font-size: 1.15rem; max-width: 52ch; color: #cfe5dd; }
+  main { padding: 28px 20px 64px; }
+  fieldset {
+    border: 1px solid var(--borde);
+    border-left: 6px solid var(--mar);
+    background: #fff;
+    border-radius: 6px;
+    margin: 0 0 20px;
+    padding: 18px 20px 8px;
+  }
+  legend {
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 0 8px;
+    color: var(--manglar);
+  }
+  .campo { margin-bottom: 16px; }
+  label { display: block; font-size: 0.98rem; margin-bottom: 6px; }
+  select, input[type="number"] {
+    width: 100%;
+    font: inherit;
+    padding: 10px 12px;
+    border: 1px solid var(--borde);
+    border-radius: 4px;
+    background: #fff;
+    color: var(--texto);
+  }
+  select:focus, input:focus, button:focus-visible {
+    outline: 3px solid var(--mar);
+    outline-offset: 1px;
+  }
+  button {
+    font: inherit;
+    font-weight: 700;
+    width: 100%;
+    padding: 14px 18px;
+    border: 0;
+    border-radius: 4px;
+    background: var(--manglar);
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.1rem;
+  }
+  button:hover:not(:disabled) { background: var(--tinta); }
+  button:disabled { background: #6f8f87; cursor: wait; }
+  #resultado {
+    display: none;
+    margin-top: 24px;
+    padding: 20px;
+    background: var(--espuma);
+    border: 1px solid var(--mar);
+    border-radius: 6px;
+    white-space: pre-line;
+    font-size: 1.02rem;
+  }
+  #resultado.error {
+    background: #fbeaea;
+    border-color: var(--alerta);
+    color: var(--alerta);
+    font-weight: 700;
+  }
+  #estado { margin-top: 16px; font-style: italic; color: var(--manglar); min-height: 1.5em; }
+  footer { text-align: center; font-size: 0.85rem; color: #55726a; padding: 0 20px 32px; }
+  @media (min-width: 640px) {
+    .fila { display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="contenedor">
+    <h1>Calculadora de huella ecologica</h1>
+    <p>Si todos vivieran como tu, cuantos planetas Tierra harian falta? Contesta el cuestionario y descubre tu estimacion.</p>
+  </div>
+</header>
+
+<main>
+  <div class="contenedor">
+    <form id="formulario">
+
+      <fieldset>
+        <legend>Alimentacion</legend>
+        <div class="campo">
+          <label for="carne">Cada cuanto comes carne de res o cerdo?</label>
+          <select id="carne" name="carne" required>
+            <option value="">Selecciona una opcion</option>
+            <option>Nunca</option>
+            <option>1-2 veces por semana</option>
+            <option>3-5 veces por semana</option>
+            <option>Diario</option>
+          </select>
+        </div>
+        <div class="campo">
+          <label for="local">Que parte de tu comida es local o de temporada?</label>
+          <select id="local" name="local" required>
+            <option value="">Selecciona una opcion</option>
+            <option>Casi nada</option>
+            <option>La mitad</option>
+            <option>Casi toda</option>
+          </select>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Transporte</legend>
+        <div class="campo">
+          <label for="transporte">Medio de transporte principal</label>
+          <select id="transporte" name="transporte" required>
+            <option value="">Selecciona una opcion</option>
+            <option>Caminar o bicicleta</option>
+            <option>Camion urbano</option>
+            <option>Moto</option>
+            <option>Auto propio</option>
+          </select>
+        </div>
+        <div class="fila">
+          <div class="campo">
+            <label for="km">Kilometros que recorres al dia</label>
+            <input type="number" id="km" name="km" min="0" step="any" inputmode="decimal" required>
+          </div>
+          <div class="campo">
+            <label for="vuelos">Vuelos en avion al año</label>
+            <input type="number" id="vuelos" name="vuelos" min="0" step="1" inputmode="numeric" required>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Energia</legend>
+        <div class="fila">
+          <div class="campo">
+            <label for="aire">Horas al dia de aire acondicionado en casa</label>
+            <input type="number" id="aire" name="aire" min="0" max="24" step="any" inputmode="decimal" required>
+          </div>
+          <div class="campo">
+            <label for="personas">Personas que viven en tu casa</label>
+            <input type="number" id="personas" name="personas" min="1" step="1" inputmode="numeric" required>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Consumo</legend>
+        <div class="fila">
+          <div class="campo">
+            <label for="ropa">Prendas nuevas que compras al mes</label>
+            <input type="number" id="ropa" name="ropa" min="0" step="1" inputmode="numeric" required>
+          </div>
+          <div class="campo">
+            <label for="celular">Cada cuantos años cambias de celular</label>
+            <input type="number" id="celular" name="celular" min="0" step="any" inputmode="decimal" required>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Residuos</legend>
+        <div class="campo">
+          <label for="separa">Separas la basura?</label>
+          <select id="separa" name="separa" required>
+            <option value="">Selecciona una opcion</option>
+            <option>Si</option>
+            <option>A veces</option>
+            <option>No</option>
+          </select>
+        </div>
+      </fieldset>
+
+      <button type="submit" id="boton">Calcular mi huella</button>
+    </form>
+
+    <div id="estado" role="status" aria-live="polite"></div>
+    <div id="resultado" role="region" aria-label="Resultado de tu huella"></div>
+  </div>
+</main>
+
+<footer>Estimacion aproximada hecha con IA, no es un calculo oficial.</footer>
+
+<script>
+  // Pega aqui la URL de tu webhook de Make (Webhooks > Custom webhook)
+  const WEBHOOK_URL = "https://hook.eu1.make.com/xfinuvudd2nkedvmpa5ri94brvhlt2er";
+
+  const CAMPOS = ["carne", "local", "transporte", "km", "vuelos", "aire", "personas", "ropa", "celular", "separa"];
+  const formulario = document.getElementById("formulario");
+  const boton = document.getElementById("boton");
+  const estado = document.getElementById("estado");
+  const resultado = document.getElementById("resultado");
+
+  formulario.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const datos = new URLSearchParams();
+    CAMPOS.forEach(function (nombre) {
+      datos.append(nombre, document.getElementById(nombre).value);
+    });
+
+    boton.disabled = true;
+    estado.textContent = "Calculando tu huella...";
+    resultado.style.display = "none";
+    resultado.classList.remove("error");
+
+    try {
+      const respuesta = await fetch(WEBHOOK_URL, { method: "POST", body: datos });
+      if (!respuesta.ok) throw new Error("HTTP " + respuesta.status);
+      const texto = await respuesta.text();
+      resultado.textContent = texto;
+      resultado.style.display = "block";
+      estado.textContent = "";
+      resultado.scrollIntoView({ behavior: "smooth", block: "start" });
+    } catch (err) {
+      resultado.textContent = "No se pudo calcular, intenta de nuevo.";
+      resultado.classList.add("error");
+      resultado.style.display = "block";
+      estado.textContent = "";
+    } finally {
+      boton.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>
