@@ -35,7 +35,7 @@ Foto Telegram
 
 ## Resultados
 Incluye:
-[Resultados](Resultados/Resultado_Practica_Reparo_o_compro.pdf)
+[Resultados](Resultados/Resultado_Reparo_Compro.pdf)
 
 
 ## Video del funcionamiento
