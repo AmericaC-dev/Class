@@ -21,31 +21,36 @@ sesión en una página).
    
   
 ## Código
-[Reparo_Compro_Equipo.blueprint.json](<Codigo/Reparo_Compro_Equipo.blueprint.json>)
+[Mercado_Equipo.blueprint.json](<Codigo/Mercado_Equipo.blueprint.json>)
 
 ## Imagenes
 Foto del diagrama Make
 
-<img src="Imagenes/foto_make_reparo_o_compro.png" width="300">
+<img src="Imagenes/foto_make_mercado.png" width="300">
 
 Foto Telegram
 
-<img src="Imagenes/foto_telegram_reparo_o_compro.png" width="300">
+<img src="Imagenes/foto_telegram_mercado.png" width="300">
+
+Foto armado
+<img src="Imagenes/foto_armado_make.jpeg" width="300">
+
+Foto Arduino IDE
+<img src="Imagenes/foto_arduinoIDE_mercado.png" width="300">
 
 
-[Investigacion](Imagenes/Act1.pdf)
+[Investigacion](Imagenes/Act1_oferta_demanda.docx)
 
 ## Resultados
 Incluye:
-[Resultados](Resultados/Resultado_Reparo_Compro.pdf)
+[Resultados](Resultados/)
 
 
 ## Video del funcionamiento
 [Readme](Video/readme.txt)
 
-[Ver video en YouTube](https://youtu.be/D_w5kpbnsDI)
+[Ver video en YouTube](https://youtube.com/shorts/cO8YILxc75o)
 
 
 
 ## Conclusiones
-La práctica cumple su objetivo: se construyó un bot de Telegram en Make que, a partir de la descripción de una falla, recomienda reparar, reemplazar o reciclar, con costos aproximados y el impacto de desechar el aparato. Al compararlo con la cotización de un taller de Mazatlán se identificó que la IA sirve como un primer filtro para orientar la decisión, pero no sustituye la revisión de un técnico. También permitió reconocer casos de obsolescencia planificada y percibida y valorar la reparación como una alternativa que ahorra dinero y reduce residuos electrónicos.
