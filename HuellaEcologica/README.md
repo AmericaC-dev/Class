@@ -2,10 +2,10 @@
 Calculadora de huella ecológica
 
 ## Descripción
-
+“Calculadora de huella ecológica” es una página web con un cuestionario sobre alimentación, transporte, energía, consumo y residuos, conectada a un escenario de Make. Responde a la pregunta: si todos vivieran como yo, ¿cuántos planetas Tierra harían falta? El flujo tiene tres módulos: Webhooks (Custom webhook), que recibe los diez campos del cuestionario; Make AI Agent, que usa la conexión Make’s AI Provider y estima la huella; y Webhooks (Webhook Response), que devuelve el resultado en texto plano a la página.
 
 ## Objetivos de aprendizaje
-
+Calcular y comparar mi huella ecológica con una página web conectada a Make y a un agente de inteligencia artificial, identificar qué hábitos la elevan, proponer estrategias económicas y personales para reducirla y evaluar la precisión de una estimación hecha con IA al compararla con la calculadora oficial de Global Footprint Network.
 
 ## Material utilizado
 Enumera todos los componentes usados:
@@ -50,5 +50,5 @@ Incluye:
 
 
 ## Conclusiones
-
+La práctica cumple su objetivo: se construyó una página web conectada a Make que, a partir de un cuestionario, estima la huella ecológica con IA, indica el impacto por área y propone acciones. Mi estimación fue de 1.1 planetas, con impacto medio en alimentación, consumo y residuos, y bajo en transporte y energía, lo que coincide con mis hábitos. La IA sirve como un primer cálculo rápido, pero no sustituye a la calculadora oficial. También permitió identificar acciones concretas, como comer menos carne, comprar menos ropa nueva y separar la basura, y una oportunidad económica de la región: la reparación y el reacondicionamiento de productos.
 
