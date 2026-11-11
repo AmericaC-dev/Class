@@ -17,7 +17,7 @@ key.
    
   
 ## Código
-[Huella_Ecologica.blueprint.json](<Codigo/Encuesta_Equipo#.blueprint.json>)
+[Encuesta_Equipo#.blueprint.json](<Codigo/Encuesta_Equipo#.blueprint.json>)
 
 [index..html](<Codigo/index-.html>)
 
@@ -27,7 +27,7 @@ Mi pagina ya publicada:
 ## Imagenes
 Foto del diagrama Make
 
-<img src="Imagenesfoto_make_encuesta.png" width="300">
+<img src="Imagenes/foto_make_encuesta.png" width="300">
 
 Foto Index
 
@@ -42,7 +42,7 @@ Foto Index
 
 ## Resultados
 Incluye:
-[Resultados](Resultados/Resultado_Simulador_Oferta_Demanda.pdf)
+[Resultados](Resultados/Resultado_Encuesta_Local_o_Global.pdf)
 
 
 ## Video del funcionamiento
