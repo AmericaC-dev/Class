@@ -33,9 +33,11 @@ Foto Telegram
 <img src="Imagenes/foto_telegram_mercado.png" width="300">
 
 Foto armado
+
 <img src="Imagenes/foto_armado_make.jpeg" width="300">
 
 Foto Arduino IDE
+
 <img src="Imagenes/foto_arduinoIDE_mercado.png" width="300">
 
 
