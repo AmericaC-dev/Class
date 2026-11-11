@@ -22,7 +22,7 @@ key.
 [index..html](<Codigo/index..html>)
 
 Mi pagina ya publicada:
-[Ver pagina](https://americac-dev.github.io/Class/Codigo/index..html/)
+[Ver pagina](https://americac-dev.github.io/Class/HuellaEcologica/Codigo/index..html)
 
 ## Imagenes
 Foto del diagrama Make
