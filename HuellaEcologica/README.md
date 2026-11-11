@@ -39,7 +39,7 @@ Foto Index
 
 ## Resultados
 Incluye:
-[Resultados](Resultados/.pdf)
+[Resultados](Resultados/Resultado_Huella_Ecologica.pdf)
 
 
 ## Video del funcionamiento
