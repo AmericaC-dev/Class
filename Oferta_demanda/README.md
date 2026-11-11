@@ -41,7 +41,7 @@ Foto Arduino IDE
 <img src="Imagenes/foto_arduinoIDE_mercado.png" width="300">
 
 
-[Investigacion](Imagenes/Act1_oferta_demanda.docx)
+[Investigacion](Imagenes/Act1_oferta_demanda.pdf)
 
 ## Resultados
 Incluye:
