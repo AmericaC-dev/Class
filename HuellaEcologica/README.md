@@ -20,7 +20,9 @@ key.
 [Huella_Ecologica.blueprint.json](<Codigo/Huella_Ecologica.blueprint.json>)
 
 [index..html](<Codigo/index..html>)
-Esta es mi pagina:
+
+Mi pagina ya publicada:
+[Ver pagina](https://americac-dev.github.io/Class/Codigo/index..html/)
 
 ## Imagenes
 Foto del diagrama Make
