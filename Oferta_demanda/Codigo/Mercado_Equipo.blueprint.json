@@ -1,0 +1,61 @@
+{
+  "name": "Mercado_Equipo#",
+  "flow": [
+    {
+      "id": 1,
+      "module": "gateway:CustomWebHook",
+      "version": 1,
+      "parameters": {
+        "maxResults": 1
+      },
+      "mapper": {},
+      "metadata": {
+        "designer": { "x": 0, "y": 0 },
+        "restore": {},
+        "parameters": [
+          { "name": "hook", "type": "hook:gateway-webhook", "label": "Webhook", "required": true },
+          { "name": "maxResults", "type": "number", "label": "Maximum number of results" }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "module": "telegram:SendReply",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "chatId": "PEGA_AQUI_TU_CHAT_ID",
+        "text": "ALERTA DE ESCASEZ\nDemanda: {{1.demanda}}\nOferta: {{1.oferta}}\nPrecio de equilibrio: ${{1.precio}} por kg\nLa demanda supera a la oferta: el precio sube."
+      },
+      "metadata": {
+        "designer": { "x": 300, "y": 0 },
+        "restore": {},
+        "parameters": [
+          { "name": "__IMTCONN__", "type": "account:telegram", "label": "Connection", "required": true }
+        ],
+        "expect": [
+          { "name": "chatId", "type": "text", "label": "Chat ID", "required": true },
+          { "name": "text", "type": "text", "label": "Text", "required": true }
+        ]
+      }
+    }
+  ],
+  "metadata": {
+    "instant": true,
+    "version": 1,
+    "scenario": {
+      "roundtrips": 1,
+      "maxErrors": 3,
+      "autoCommit": true,
+      "autoCommitTriggerLast": true,
+      "sequential": false,
+      "slots": null,
+      "confidential": false,
+      "dataloss": false,
+      "dlq": false,
+      "freshVariables": false
+    },
+    "designer": { "orphans": [] },
+    "zone": "us2.make.com"
+  }
+}
