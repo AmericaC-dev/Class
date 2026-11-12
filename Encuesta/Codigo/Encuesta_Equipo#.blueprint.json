@@ -1,0 +1,354 @@
+{
+    "name": "Encuesta_Equipo#",
+    "flow": [
+        {
+            "id": 1,
+            "module": "gateway:CustomWebHook",
+            "version": 1,
+            "parameters": {
+                "hook": 4088731,
+                "maxResults": 1
+            },
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 0
+                },
+                "restore": {
+                    "parameters": {
+                        "hook": {
+                            "data": {
+                                "editable": "true"
+                            },
+                            "label": "Encuesta"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "id": 2,
+            "module": "builtin:BasicRouter",
+            "version": 1,
+            "mapper": null,
+            "metadata": {
+                "designer": {
+                    "x": 300,
+                    "y": 0
+                }
+            },
+            "routes": [
+                {
+                    "flow": [
+                        {
+                            "id": 3,
+                            "module": "google-sheets:addRow",
+                            "version": 2,
+                            "parameters": {
+                                "__IMTCONN__": 12956666
+                            },
+                            "filter": {
+                                "name": "Es respuesta",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{1.accion}}",
+                                            "b": "respuesta",
+                                            "o": "text:equal"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "mode": "map",
+                                "values": {
+                                    "0": "{{formatDate(now; \"DD/MM/YYYY HH:mm\"; \"America/Mazatlan\")}}",
+                                    "1": "{{1.comida}}",
+                                    "2": "{{1.ropa}}",
+                                    "3": "{{1.apps}}",
+                                    "4": "{{1.criterio}}",
+                                    "5": "{{1.origen}}",
+                                    "6": "{{1.edad}}"
+                                },
+                                "sheetId": "Sheet1",
+                                "spreadsheetId": "1OtBPhqVmrnu-oQpu01-zE2OCVm6keqhZcI5ivdQOu_s",
+                                "tableFirstRow": "A1:Z1",
+                                "insertDataOption": "INSERT_ROWS",
+                                "valueInputOption": "USER_ENTERED",
+                                "insertUnformatted": false
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 600,
+                                    "y": -150
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "mode": {
+                                            "label": "Enter manually"
+                                        },
+                                        "tableFirstRow": {
+                                            "label": "A-Z"
+                                        },
+                                        "insertDataOption": {
+                                            "mode": "chose",
+                                            "label": "Insert rows"
+                                        },
+                                        "valueInputOption": {
+                                            "mode": "chose",
+                                            "label": "User entered"
+                                        },
+                                        "insertUnformatted": {
+                                            "mode": "chose"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "google"
+                                            },
+                                            "label": "America's Google connection"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "id": 4,
+                            "module": "gateway:WebhookRespond",
+                            "version": 1,
+                            "parameters": {},
+                            "mapper": {
+                                "body": "Respuesta registrada. Gracias por participar.",
+                                "status": "200",
+                                "headers": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "text/plain; charset=utf-8"
+                                    },
+                                    {
+                                        "key": "Access-Control-Allow-Origin",
+                                        "value": "*"
+                                    }
+                                ]
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 900,
+                                    "y": -150
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 5,
+                            "module": "google-sheets:filterRows",
+                            "version": 2,
+                            "parameters": {
+                                "__IMTCONN__": 10328984
+                            },
+                            "filter": {
+                                "name": "Es reporte",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{1.accion}}",
+                                            "b": "reporte",
+                                            "o": "text:equal"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "from": "drive",
+                                "limit": "200",
+                                "sheetId": "Sheet1",
+                                "sortOrder": "asc",
+                                "spreadsheetId": "1OtBPhqVmrnu-oQpu01-zE2OCVm6keqhZcI5ivdQOu_s",
+                                "tableFirstRow": "A1:Z1",
+                                "includesHeaders": true,
+                                "valueRenderOption": "FORMATTED_VALUE",
+                                "dateTimeRenderOption": "FORMATTED_STRING"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 600,
+                                    "y": 150
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "from": {
+                                            "label": "Select from My Drive"
+                                        },
+                                        "orderBy": {
+                                            "mode": "chose",
+                                            "label": "Empty"
+                                        },
+                                        "sheetId": {
+                                            "mode": "chose",
+                                            "label": "Sheet1"
+                                        },
+                                        "sortOrder": {
+                                            "mode": "chose",
+                                            "label": "Ascending"
+                                        },
+                                        "spreadsheetId": {
+                                            "mode": "chose",
+                                            "label": "Encuesta"
+                                        },
+                                        "tableFirstRow": {
+                                            "label": "A-Z"
+                                        },
+                                        "includesHeaders": {
+                                            "mode": "chose",
+                                            "label": "Yes"
+                                        },
+                                        "valueRenderOption": {
+                                            "mode": "chose",
+                                            "label": "Formatted value"
+                                        },
+                                        "dateTimeRenderOption": {
+                                            "mode": "chose",
+                                            "label": "Formatted string"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "google"
+                                            },
+                                            "label": "America's Google connection (americacoronadolizarraga@gmail.com)"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "id": 6,
+                            "module": "util:TextAggregator",
+                            "version": 1,
+                            "parameters": {
+                                "feeder": 5,
+                                "rowSeparator": "\n"
+                            },
+                            "mapper": {
+                                "value": "{{5.`1`}} | {{5.`2`}} | {{5.`3`}} | {{5.`4`}} | {{5.`5`}} | {{5.`6`}}"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 900,
+                                    "y": 150
+                                }
+                            }
+                        },
+                        {
+                            "id": 7,
+                            "module": "ai-local-agent:RunLocalAIAgent",
+                            "version": 0,
+                            "parameters": {
+                                "makeConnectionId": 10326816
+                            },
+                            "mapper": {
+                                "message": "Respuestas de la encuesta (comida | ropa | apps | criterio | origen | edad):\n{{6.text}}",
+                                "outputType": "text",
+                                "tokenLimit": "50",
+                                "modelConfig": {
+                                    "recursionLimit": "300",
+                                    "aiCompactionEnabled": true,
+                                    "iterationsFromHistoryCount": "10"
+                                },
+                                "defaultModel": "medium",
+                                "systemPrompt": "Eres un analista de economia local para alumnos de Desarrollo Sustentable del TecNM en Mazatlan, Sinaloa.\nRecibiras las respuestas de una encuesta, una por linea, con el formato: comida | ropa | apps | criterio | origen | edad.\nUsa UNICAMENTE esas respuestas; no inventes datos.\nResponde en texto plano (sin asteriscos, sin markdown), en espanol, con este formato:\nTOTAL DE RESPUESTAS: [numero]\nRESULTADOS\nComida: [cada opcion con su porcentaje]\nRopa: [...]\nApps internacionales: [...]\nCriterio de compra: [...]\nConoce el origen: [...]\nANALISIS\n[4 lineas maximo: que tan local o global es el consumo de esta comunidad y que diferencias hay por edad]\nCONCLUSIONES\n1. [efecto en la economia local]\n2. [efecto ambiental por transporte y empaques]\n3. [una accion concreta para impulsar el consumo local]",
+                                "promptCaching": "none",
+                                "fallbackEnabled": false
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1200,
+                                    "y": 150
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "outputType": {
+                                            "label": "Text"
+                                        },
+                                        "defaultModel": {
+                                            "mode": "chose",
+                                            "label": "MediumModel: gpt-5-nano. Reasoning: low. A balanced, quick choice for clearly defined tasks needing reliable answers rather than deep analysis"
+                                        },
+                                        "promptCaching": {
+                                            "label": "Automatic (always on)"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "makeConnectionId": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "ai-provider"
+                                            },
+                                            "label": "Make's AI Provider (default)"
+                                        }
+                                    }
+                                }
+                            },
+                            "tools": []
+                        },
+                        {
+                            "id": 8,
+                            "module": "gateway:WebhookRespond",
+                            "version": 1,
+                            "parameters": {},
+                            "mapper": {
+                                "body": "{{7.response}}",
+                                "status": "200",
+                                "headers": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "text/plain; charset=utf-8"
+                                    },
+                                    {
+                                        "key": "Access-Control-Allow-Origin",
+                                        "value": "*"
+                                    }
+                                ]
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1500,
+                                    "y": 150
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "metadata": {
+        "instant": true,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "eu1.make.com",
+        "notes": []
+    }
+}
