@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Huella energética de la nube</title>
+<style>
+  :root {
+    --verde-oscuro: #1b5e20;
+    --verde: #2e7d32;
+    --verde-claro: #e8f5e9;
+    --hoja: #81c784;
+    --cielo: #e3f2fd;
+    --texto: #1f2d1f;
+    --borde: #b7d7b9;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    color: var(--texto);
+    background: linear-gradient(160deg, var(--verde-claro) 0%, var(--cielo) 100%);
+    min-height: 100vh;
+    line-height: 1.5;
+  }
+  header {
+    background: linear-gradient(135deg, var(--verde-oscuro), var(--verde));
+    color: #fff;
+    padding: 28px 16px 24px;
+    text-align: center;
+  }
+  header h1 { margin: 0 0 8px; font-size: clamp(1.5rem, 5vw, 2.2rem); }
+  header p { margin: 0 auto; max-width: 620px; font-size: 1rem; opacity: .95; }
+  main { max-width: 720px; margin: -14px auto 32px; padding: 0 14px; }
+  form, .resultado {
+    background: #fff;
+    border: 1px solid var(--borde);
+    border-radius: 14px;
+    padding: 18px;
+    box-shadow: 0 4px 14px rgba(27, 94, 32, .12);
+  }
+  .campos { display: grid; grid-template-columns: 1fr; gap: 14px; }
+  @media (min-width: 600px) { .campos { grid-template-columns: 1fr 1fr; } }
+  label { display: block; font-weight: 600; font-size: .95rem; margin-bottom: 4px; color: var(--verde-oscuro); }
+  label span { display: block; font-weight: 400; font-size: .82rem; color: #4a5d4a; }
+  input[type="number"] {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 1rem;
+    border: 1.5px solid var(--borde);
+    border-radius: 8px;
+    background: #fafffa;
+  }
+  input[type="number"]:focus { outline: 3px solid var(--hoja); border-color: var(--verde); }
+  button {
+    margin-top: 18px;
+    width: 100%;
+    padding: 13px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #fff;
+    background: var(--verde);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  button:hover:not(:disabled) { background: var(--verde-oscuro); }
+  button:disabled { background: #8aa98c; cursor: not-allowed; }
+  .resultado { margin-top: 18px; display: none; }
+  .resultado.visible { display: block; }
+  .resultado h2 { margin: 0 0 8px; font-size: 1.1rem; color: var(--verde-oscuro); }
+  #salida { white-space: pre-line; margin: 0; word-wrap: break-word; }
+  .resultado.error { border-color: #d9a3a3; background: #fff6f6; }
+  .resultado.error h2, .resultado.error #salida { color: #8e2b2b; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Huella energética de la nube</h1>
+  <p>Cada acción digital se procesa en centros de datos que consumen energía; esta página estima tu huella.</p>
+</header>
+
+<main>
+  <form id="formulario">
+    <div class="campos">
+      <div>
+        <label for="video">Video en streaming <span>Horas al día (YouTube, Netflix, TikTok)</span></label>
+        <input type="number" id="video" name="video" min="0" step="any" placeholder="0">
+      </div>
+      <div>
+        <label for="musica">Música en streaming <span>Horas al día</span></label>
+        <input type="number" id="musica" name="musica" min="0" step="any" placeholder="0">
+      </div>
+      <div>
+        <label for="redes">Redes sociales <span>Horas al día</span></label>
+        <input type="number" id="redes" name="redes" min="0" step="any" placeholder="0">
+      </div>
+      <div>
+        <label for="videollamadas">Videollamadas <span>Horas a la semana</span></label>
+        <input type="number" id="videollamadas" name="videollamadas" min="0" step="any" placeholder="0">
+      </div>
+      <div>
+        <label for="juegos">Juegos en línea <span>Horas al día</span></label>
+        <input type="number" id="juegos" name="juegos" min="0" step="any" placeholder="0">
+      </div>
+      <div>
+        <label for="nube">Almacenamiento en la nube <span>GB guardados (fotos, archivos)</span></label>
+        <input type="number" id="nube" name="nube" min="0" step="any" placeholder="0">
+      </div>
+      <div>
+        <label for="ia">Chatbots de IA <span>Consultas al día</span></label>
+        <input type="number" id="ia" name="ia" min="0" step="any" placeholder="0">
+      </div>
+      <div>
+        <label for="correos">Correos enviados <span>Correos al día</span></label>
+        <input type="number" id="correos" name="correos" min="0" step="any" placeholder="0">
+      </div>
+    </div>
+    <button type="submit" id="boton">Calcular mi huella</button>
+  </form>
+
+  <section class="resultado" id="resultado" aria-live="polite">
+    <h2>Tu resultado</h2>
+    <p id="salida"></p>
+  </section>
+</main>
+
+<script>
+  // Pega aquí la URL del webhook de Make (Webhooks → Custom webhook).
+  const WEBHOOK_URL = "https://hook.eu1.make.com/1sqh77w802xuw2zmquw7lpvw8ckcs6pi";
+
+  const CAMPOS = ["video", "musica", "redes", "videollamadas", "juegos", "nube", "ia", "correos"];
+  const formulario = document.getElementById("formulario");
+  const boton = document.getElementById("boton");
+  const caja = document.getElementById("resultado");
+  const salida = document.getElementById("salida");
+  const TEXTO_BOTON = boton.textContent;
+
+  function mostrar(texto, esError) {
+    salida.textContent = texto;
+    caja.classList.add("visible");
+    caja.classList.toggle("error", !!esError);
+  }
+
+  formulario.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const datos = new URLSearchParams();
+    CAMPOS.forEach(function (nombre) {
+      let valor = parseFloat(document.getElementById(nombre).value);
+      if (isNaN(valor) || valor < 0) valor = 0;
+      datos.append(nombre, valor);
+    });
+
+    boton.disabled = true;
+    boton.textContent = "Calculando...";
+    mostrar("Calculando...", false);
+
+    try {
+      const respuesta = await fetch(WEBHOOK_URL, { method: "POST", body: datos });
+      if (!respuesta.ok) throw new Error("HTTP " + respuesta.status);
+      const texto = await respuesta.text();
+      mostrar(texto, false);
+    } catch (err) {
+      mostrar("No se pudo calcular, intenta de nuevo.", true);
+    } finally {
+      boton.disabled = false;
+      boton.textContent = TEXTO_BOTON;
+    }
+  });
+</script>
+</body>
+</html>
