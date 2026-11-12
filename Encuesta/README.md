@@ -17,7 +17,7 @@ key.
    
   
 ## Código
-[Encuesta_Equipo#.blueprint.json](<Codigo/Encuesta_Equipo#.blueprint.json>)
+[Encuesta_Equipo#.blueprint.json](<Codigo/Encuesta_Equipo.blueprint.json>)
 
 [index..html](<Codigo/index-.html>)
 
